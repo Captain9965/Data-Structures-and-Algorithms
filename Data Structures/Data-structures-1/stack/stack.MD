@@ -8,3 +8,10 @@ Working:
 5. Before pushing, we check whether the stack is already full and before popping, we check whether the stack is already empty.
 
 Implementation is commonly through arrays, but can also be done through lists.
+## Stack time complexity:
+For the array implementation, insertion and deletion( push and pop) take constant time 0(1)
+
+## Applications:
+1. to reverse a word
+2. Used by compilers to evaluate mathematical expressions by converting the experssion to pre-fix or post-fix form.
+3. Browsers use a stack to store the urls that one has visited to enable back operation
