@@ -33,7 +33,7 @@ This is the top most of a Tree
 
  ### Height of a tree:
 
- This is the height of the root or th depth of the deepest node.
+ This is the height of the root or the depth of the deepest node.
 
  ### Degree of a node:
 
