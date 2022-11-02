@@ -127,6 +127,26 @@ bool isPerfect(Node *root){
     return isPerfectR(root, d);
 }
 
+//check for balanced binary tree:
+bool isBalancedBinaryTree(Node * root, int &height){
+    int left_height, right_height = 0;
+
+    if (!root){
+        height = 0;
+        return true;
+    }
+
+    bool l = isBalancedBinaryTree(root->right, left_height);
+    bool r = isBalancedBinaryTree(root->left, right_height);
+
+    height = (left_height > right_height ? left_height : right_height ) + 1;
+
+    if (abs(left_height - right_height) <= 1){
+        return l && r;
+    }
+    return false;
+}
+
 
 int main(){
     struct Node * root = newNode(20);
@@ -142,10 +162,11 @@ int main(){
 
     cout << "\nTraverse postorder ->" << " ";
     traversePostorder(root);
-
+    int height = 0;
     cout << "\n is this a full binary tree? " << (isFullBinaryTree(root) ? "yes": "no") << " ";
     cout <<"\n is this a perfect binary tree? " << (isPerfect(root) ? "yes": "no") << " ";
     cout << "\n is this a complete binary tree? " << (isCompleteBinaryTree(root, 0, countNodes(root)) ? "yes": "no");
+    cout << "\n is this a balanced binary tree? " << (isBalancedBinaryTree(root, height)? "yes": "no");
 
 
 

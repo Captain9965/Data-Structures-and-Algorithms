@@ -71,11 +71,35 @@ def isCompleteBinaryTree(root, index, numberOfNodes):
         return False
     return (isCompleteBinaryTree(root.left, 2 * index + 1, numberOfNodes) 
             and (isCompleteBinaryTree(root.right, 2 * index + 2, numberOfNodes)))
+
+#do this as python does not have references:
+
+class Height:
+    def __init__(self):
+        self.height = 0
+        
+def isHeightBalanced(root, height):
+    left_height = Height()
+    right_height = Height()
+
+    if root is None:
+        return True
+    l = isHeightBalanced(root.left, left_height)
+    r = isHeightBalanced(root.right, right_height)
+
+    height.height = max(left_height.height, right_height.height) + 1
+
+    if abs(left_height.height - right_height.height) <= 1:
+        return l and r
+    return False
+
+    
+
     
 def count_nodes(root):
     if root is None:
         return 0
-    return (1 + count_nodes(root.left) + (count_nodes(root.right)))
+    return (1 + count_nodes(root.left) + (count_nodes(root.right))) 
 
 
 if __name__ == "__main__":
@@ -83,6 +107,7 @@ if __name__ == "__main__":
     binTree.left = Node(30)
     binTree.right = Node(40)
     binTree.left.left = Node(50)
+    # binTree.left.left.left = Node(70)
 
     print("Traversing inorder->")
     binTree.traverseInorder()
@@ -96,16 +121,19 @@ if __name__ == "__main__":
     binTree.traversePostorder()
     print()
 
-    print("Is this a full tree? -> " + "yes" if isFullBtree(binTree) else "no")
+    print("Is this a full tree? -> " + ("yes" if isFullBtree(binTree) else "no"))
     print("Height of the tree:-> ", calculateheight(binTree))
-    print("Is this a perfect binary tree? -> " + "yes" if (isPerfectBinaryTree(binTree, calculateheight(binTree))) else "no")
+    print("Is this a perfect binary tree? -> " + ("yes" if (isPerfectBinaryTree(binTree, calculateheight(binTree))) else "no"))
 
     nodeCount = count_nodes(binTree)
     index = 0
 
     print("This is the node count -> ", nodeCount)
     print()
-    print("Is this a complete binary tree?-> " + "yes" if (isCompleteBinaryTree(binTree, index, nodeCount)) else "no")
+    print("Is this a complete binary tree?-> " + ("yes" if (isCompleteBinaryTree(binTree, index, nodeCount)) else "no"))
+    print()
+    height = Height()
+    print("Is this a balanced tree? -> " + ("yes" if (isHeightBalanced(binTree, height)) else "No"))
 
 
 

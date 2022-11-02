@@ -95,3 +95,18 @@ Also, the parent of any element at index `i` is given by the lower bound of `(i 
 ### Applications of the tree data structure:
 1. Heap sort.
 2. Heap based data structures.
+
+
+## Balanced Binary tree:
+
+This is a binary tree in which the height of the left and the right binary trees of every node differ by not more than 1
+
+Conditions:
+1. The difference between the left and the right subtrees of any node is not more than one. 
+2. The left subtree is balanced. 
+3. The right subtree is balanced. 
+
+
+### Balanced tree applications:
+1. AVL tree
+2. Balanced binary search tree
