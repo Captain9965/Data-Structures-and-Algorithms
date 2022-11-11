@@ -110,3 +110,28 @@ Conditions:
 ### Balanced tree applications:
 1. AVL tree
 2. Balanced binary search tree
+
+## Binary Search Tree:
+
+This is a data structure that quickly allows us to maintain a sorted list of numbers. Called a binary search tree because:
+- Each node has a maximum of 2 children
+- It is called a search tree because it can be used to search for a number in `0(log(n))` time. 
+
+Difference with a regular binary tree:
+- All nodes of the left subtree are less than the root node.
+- All nodes of the right subtree are more than the root node.
+
+2 basic operations that one can perform on a binary search tree:
+### Search algorithm:
+
+The search algorithm relies on the fact that each left subtree has values below the root and each right subtree has values above the root. It follows that if a value is below the root, then we should only search the left subtree and vice versa. 
+
+### Inserting algorithm:
+
+We try to maintain the rule of the left subtree being always less than the root. 
+We keep going either to the left or right sub-tree depending on the value and when we reach a point left or right subtree is NULL, we put the new node there. 
+
+### Deletion operation:
+
+
+
