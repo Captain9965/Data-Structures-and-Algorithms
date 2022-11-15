@@ -132,6 +132,24 @@ We try to maintain the rule of the left subtree being always less than the root.
 We keep going either to the left or right sub-tree depending on the value and when we reach a point left or right subtree is NULL, we put the new node there. 
 
 ### Deletion operation:
+1. In the first case, if the leaf to be deleted is the leaf node, we simply delete the node from the tree
+2. In the second case, if the node to be delted has only one child node, replace that node with its child node and remove the child node from its initial position.
+3. In the third case, if the node to be deleted has 2 children, then get the inorder successor of that node, replace the node with the inorder successor then remove the inorder successor from its original position.
+
+### Time complexity:
+`0 (log n)`  in search, insertion and deletion in best case and average complexity and `0(n)` in worst case where `n` is the number of nodes in the tree.
+
+### Space complexity:
+
+Space complexity for all operations is `0(n)`
+
+### Applications of a binary search tree:
+
+1. Multilevel indexing in databases.
+2. dynamic sorting.
+3. managing virtual memory areas in the Unix kernel.
+
+
 
 
 
