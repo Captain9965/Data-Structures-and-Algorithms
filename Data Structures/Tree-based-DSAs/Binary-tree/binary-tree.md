@@ -150,6 +150,85 @@ Space complexity for all operations is `0(n)`
 3. managing virtual memory areas in the Unix kernel.
 
 
+## AVL Tree:
+
+This is a self-balancing BST in which each node maintains extra information called the **balance factor** which is either 0, -1, or +1. 
+Name derived from its inventors **Avelson-Velsky and Landis**
+
+### Balance factor:
+
+The balance factor of a node is the difference between the height of the left sub-tree and the right sub-tree of that node.
+
+`BF = HL -HR or HR - HL`
+
+The self balancing is maintained by the balance factor which should be either of the 3 values `0, +1, -1`
+
+
+### Operations of an AVL tree:
+
+### 1. Rotation:
+
+This is where the positions of the nodes are interchanged
+
+#### Left Rotate:
+In this, the arrangement of nodes in the right is transformed into the arrangement on the left node.
+
+#### Right Rotate:
+The arrangement of nodes in the left is transformed into the arrangement on the right node.
+
+#### Left-right Rotation:
+The arrangements are first shifted to the left and then to the right.
+
+### Right - left Rotation:
+The arrangements are first shifted to the right and then to the left.
+
+### Inserting a new node:
+
+Always inserted as a leaf node with a balance factor equal to 0. 
+1. Insert the node as a leaf node.
+2. Update the balance factor of the nodes after insertion.
+3. If nodes are unbalanced, then rebalance the node.
+    - If `BF > 1`, then the height of the left sub-tree is greater than the right sub-tree. So do a right rotation or left-right rotation.
+    - If `newNodeKey < leftchildkey` do a right rotation
+    - Else do a left-right rotation.
+    - If the `BF < -1` then do the converse
+
+### Algorithm to delete a node:
+
+After deleting a node, the balance factors do change. Suitable rotations are made in order to rebalance the balance factor. 
+
+1. Locate the `nodeToBeDeleted` through recursion.
+2. Cases for deleting a node:
+    - If it is the `leafnode`, then just remove it
+    - If it has one child, then substitute the contents with that of the child then remove the child
+    - If it has 2 children, then find the inorder successor of the `nodeToBeDeleted` which is the minimum value of key in the right sub-tree. 
+3. Update the balance factor of the nodes.
+4. Rebalance the tree if unbalanced:
+    - If the `BF` of `currentnode` > 1,
+        -If `BF` of `leftchild` >= 0, do a right rotation
+        - Else do left-right rotation
+    - If the `BF` of `currentnode < -1`,
+        - If the `rightchild` <= 0, then do a left rotation
+        - Else do a right-left rotation
+
+## Complexities:
+
+`0( log n )` in insertion, deletion and search..
+
+## AVL Tree Applications:
+
+1. indexing large records in databases
+2. searching in large databases
+
+
+
+
+
+
+
+
+
+
 
 
 
