@@ -1,5 +1,5 @@
 """ avl tree implementation in python: """
-
+import sys
 #tree node: 
 
 class Node(object):
@@ -91,5 +91,77 @@ class AVLTree(object):
         T2 = y.left
         y.left = z
         z.right = T2
-        
+        z.height = 1 + max(self.getHeight(z.left), self.getHeight(z.right))
+        y.height = 1 + max(self.getHeight(y.left), self.getHeight(y.right))
+        return y
 
+    #right rotation:
+    def rightRotate(self, z):
+        y = z.left
+        T3 = y.right
+        y.right = z
+        z.left = T3
+        z.height = 1 + max(self.getHeight(z.left), self.getHeight(z.right))
+        y.height = 1 + max(self.getHeight(y.left), self.getHeight(y.right))
+        return y
+
+    #get the height of the node:
+    def getHeight(self, root):
+        if not root:
+            return 0
+        return root.height
+    #get balance factor of the node:
+    def get_balance(self, root):
+        if not root:
+            return 0
+        return (self.getHeight(root.left) - self.getHeight(root.right))
+    #def getMinValNode:
+    def getMinValNode(self, root):
+        if root.left is None or root.right is None:
+            return root
+        return self.getMinValNode(root.left)
+
+    def preOrder(self, root):
+        if not root:
+            return
+        print("{0} ".format(root.key), end="")
+        self.preOrder(root.left)
+        self.preOrder(root.right)
+    
+    #print helper:
+    def printHelper(self, currPtr, indent, last):
+        if currPtr != None:
+            sys.stdout.write(indent)
+            if last:
+                sys.stdout.write("R---")
+                indent +="   "
+            else:
+                sys.stdout.write("L---")
+                indent+="|   "
+            print(currPtr.key)
+            self.printHelper(currPtr.left, indent, False)
+            self.printHelper(currPtr.right, indent, True)
+
+if __name__ == "__main__":
+    myTree = AVLTree()
+
+    root = None
+
+    nums = [33, 13, 52, 9, 21, 61, 8, 11]
+
+    #populate the tree:
+    for num in nums:
+        root = myTree.insert_node(root, num)
+    myTree.printHelper(root, "", True)
+
+    key = 61
+    root = myTree.delete_node(root, key)
+
+    print("After deletion: ")
+
+    myTree.printHelper(root, "", True)
+    
+
+
+
+        
