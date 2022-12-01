@@ -1,4 +1,4 @@
-""" python implementation of insertion operation in a b-tree:"""
+""" python implementation of a b-tree:"""
 
 #node container:
 class BTreeNode:
@@ -65,6 +65,62 @@ class BTree:
             for i in x.child:
                 self.printTree(i, l)
 
+    #delete a node:
+    
+    def delete(self, x, k):
+        t = self.t
+        i = 0
+
+        while i < len(x.keys) and k[0] > x.keys[i][0]:
+            i += 1
+        if x.leaf:
+            if i < len(x.keys) and x.keys[i][0] == k[0]:
+                x.keys.pop(i)
+                return
+            return
+        if i < len(x.keys) and x.keys[i][0] == k[0]:
+            return self.delete_internal_node(x, k, i)
+        elif len(x.child[i].keys) >= t:
+            self.delete(x.child[i], k)
+        else:
+            if i != 0 and i + 2 < len(x.child):
+                if len(x.child[i - 1].keys) >= t:
+                    self.delete_sibling(x, i , i - 1)
+                elif len(x.child[i + 1].keys) >= t:
+                    self.delete_sibling(x, i, i + 1)
+                else:
+                    self.delete_merge(x, i, i + 1)
+            elif i == 0:
+                if len(x.child[i + 1].keys) >= t:
+                    self.delete_sibling(x, i, i + 1)
+                else:
+                    self.delete_merge(x, i , i + 1)
+            elif i + 1 == len(x.child):
+                if len(x.child[i - 1].keys) >= t:
+                    self.delete_sibling(x, i, i - 1)
+                else:
+                    self.delete_merge(x, i, i - 1)
+            self.delete(x.child[i], k)
+
+    def delete_internal_node(self, x, k, i):
+        t = self.t
+        if x.leaf:
+            if x.keys[i][0] == k[0]:
+                x.keys.pop(i)
+                return
+            return
+
+        if len(x.child[i].keys) >= t:
+            x.keys[i] = self.delete_predecessor(x.child[i])
+            return
+        if len(x.child[i + 1]) >= t:
+            x.keys[i] = self.delete_successor(x.child[i + 1])
+            return
+        else:
+            self.delete_merge(x, i, i + 1)
+            self.delete_internal_node(x.child[i], k, self.t - 1)
+    
+    
 
 if __name__ == "__main__":
     B = BTree(3)
