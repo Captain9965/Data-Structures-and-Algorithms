@@ -14,6 +14,16 @@ class Node{
         bool leaf;
     public:
         Node(int t , bool leaf);
+        int findkey(int k);
+        void deletion(int k);
+        void removeFromLeaf(int idx);
+        void removeFromNonLeaf(int idx);
+        int getPredecessor(int idx);
+        int getSuccessor(int idx);
+        void fill(int idx);
+        void borrowFromPrev(int idx);
+        void borrowFromNext(int idx);
+        void merge(int idx);
         void insertNonFull(int k);
         void splitChild(int i, Node *y);
         void traverse();
@@ -148,6 +158,61 @@ void Node::splitChild(int i, Node * y){
     keys[i] = y->keys[t -1];
     n = n + 1;
 }
+
+/* find the key:*/
+int Node::findkey(int k){
+    int idx = 0;
+    while (idx < n && keys[idx] < k){
+        idx ++;
+    }
+    return idx;
+}
+
+/* deletion operation:*/
+void Node::deletion(int k){
+    int idx = findkey(k);
+
+    if (idx < n && keys[idx] == k){
+        if(leaf){
+            removeFromLeaf(idx);
+        }
+        else{
+            removeFromNonLeaf(idx);
+        }
+    }
+    else{
+        if (leaf){
+            cout << "The key " << k << " does not exist in the tree" << endl;
+            return;
+        }
+
+        bool flag = ((idx == n )? true : false);
+
+        if (C[idx]->n < t){
+            fill(idx);
+        } 
+
+        if (flag && idx > n){
+            C[idx - 1]->deletion(k);
+        }
+        else{
+            C[idx]->deletion(k);
+        }
+    }
+    return;
+}
+
+/* remove from leaf:*/
+
+void Node::removeFromLeaf(int idx){
+    for (int i = idx + 1; i < n; ++ i){
+        keys[i - 1] = keys[i];
+    }
+    n --;
+    return;
+}
+
+
 
 int main(){
     BTree t(3);
