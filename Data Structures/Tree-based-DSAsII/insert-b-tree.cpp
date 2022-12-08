@@ -51,6 +51,7 @@ class BTree{
         }
 
         void insert(int k);
+        void deletion(int k);
 
 };
 
@@ -100,6 +101,10 @@ void BTree::insert(int k){
                 root->insertNonFull(k);
             }
     }
+}
+
+void BTree::deletion(int k){
+    
 }
 
 /* insert non-full condition: */
@@ -212,7 +217,133 @@ void Node::removeFromLeaf(int idx){
     return;
 }
 
+void Node::removeFromNonLeaf(int idx){
+    int k = keys[idx];
 
+    if (C[idx]->n >= t){
+        int pred = getPredecessor(idx);
+        keys[idx] = pred;
+        C[idx]->deletion(pred);
+    }
+    else if(C[idx + 1]->n >= t){
+        int succ = getSuccessor(idx);
+        keys[idx] = succ;
+        C[idx + 1]->deletion(succ);
+    }
+    else{
+        merge(idx);
+        C[idx]->deletion(k);
+    }
+    return;
+}
+
+int Node::getPredecessor(int idx){
+    Node * curr = C[idx];
+    while  (!curr->leaf){
+        curr = curr->C[curr->n];
+    }
+    return curr->keys[curr->n - 1];
+}
+
+int Node::getSuccessor(int idx){
+    Node * curr = C[idx + 1];
+    while(!curr->leaf){
+        curr = curr->C[0];
+    }
+    return curr->keys[0];
+}
+
+void Node::fill(int idx){
+    if (idx != 0 && C[idx - 1]->n >= t){
+        borrowFromPrev(idx);
+    }
+    else if(idx != n && C[idx + 1]->n >= t){
+        borrowFromNext(idx);
+    }
+    else{
+        if (idx != n){
+            merge(idx);
+        }else{
+            merge(idx - 1);
+        }
+    }
+    return;
+}
+
+void Node::borrowFromPrev(int idx){
+    Node * child = C[idx];
+    Node * sibling = C[idx - 1];
+    for (int i = child->n -1; i >= 0; --i){
+        child->keys[i + 1] = child->keys[i];
+    }
+    if(!child->leaf){
+        for (int i = child->n; i >= 0; --i){
+            child->C[i + 1] = child->C[i];
+        }
+    }
+
+    child->keys[0] = keys[idx - 1];
+
+    if (!child->leaf){
+        child->C[0] = sibling->C[sibling->n];
+    }
+    keys[idx - 1] = sibling->keys[sibling->n - 1];
+    child->n += 1;
+    sibling->n -= 1;
+    return;
+}
+
+void Node::borrowFromNext(int idx){
+    Node * child = C[idx];
+    Node * sibling = C[idx + 1];
+    child->keys[(child->n)] = keys[idx];
+
+    if(!child->leaf){
+        child->C[(child->n) + 1] = sibling->C[0]; 
+    }
+
+    keys[idx] = sibling->keys[0];
+
+    for (int i = 1; i < sibling->n; ++ i){
+        sibling->keys[i - 1] = sibling->keys[i];
+    }
+
+    if (!sibling->leaf){
+        for(int i = 1; i <= sibling->n; ++i){
+            sibling->C[i - 1] = sibling->C[i];
+        }
+    }
+    child->n +=1;
+    sibling->n -=1;
+    return;
+}
+
+void Node::merge(int idx){
+    Node * child = C[idx];
+    Node * sibling = C[idx + 1];
+
+    child->keys[t - 1] = keys[idx];
+
+    for(int i = 0; i < sibling->n; ++i){
+        child->keys[i + t] = sibling->keys[i];
+    }
+    if (!child->leaf){
+        for(int i = 0; i <= sibling->n; ++i){
+            child->C[i + t] = sibling->C[i];
+        }
+    }
+    for (int i = idx + 1; i < n; ++i){
+        keys[i - 1] = keys[i];
+    }
+    for (int i = idx + 2; i <= n; ++i){
+        C[i - 1] = C[i];
+    }
+
+    child->n += sibling->n + 1;
+    n --;
+    delete(sibling);
+    return;
+}
 
 int main(){
     BTree t(3);
@@ -229,4 +360,6 @@ int main(){
 
     cout << "The tree is -> ";
     t.traverse();
+
+    t.delet
 }
