@@ -82,3 +82,9 @@ The key to be deleted lies in the internal node:
 
 ### Case 3:
 If the target lies in a internal node and the deletion of a key leads to a fewer number of keys than the minimum, then look for the inorder predecessor then the inorder successor...if both contain min keys, then the children should be merged. If the sibling also contains min number of keys, then merge the node with the sibling along with the parent. 
+
+### Deletion complexity:
+
+Best case time complexity: `0 (log n)`
+Average and worst case space complexity: `0(n)` 
+

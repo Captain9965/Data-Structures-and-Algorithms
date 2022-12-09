@@ -104,7 +104,24 @@ void BTree::insert(int k){
 }
 
 void BTree::deletion(int k){
-    
+    if (!root){
+        cout << "The tree is empty" << endl;
+        return;
+    }
+
+    root->deletion(k);
+
+    if (root->n == 0){
+        Node * tmp = root;
+        if (root->leaf){
+            root = nullptr;
+        }
+        else{
+            root = root->C[0];
+        }
+        delete tmp;
+    }
+    return;
 }
 
 /* insert non-full condition: */
@@ -358,8 +375,13 @@ int main(){
     t.insert(20);
     t.insert(23);
 
-    cout << "The tree is -> ";
+    cout << "The tree is -> " << endl;
     t.traverse();
+    // cout << endl << "Tree size -> " << sizeof(t) << endl;
 
-    t.delet
+    t.deletion(20);
+
+    cout << endl << "The tree after deletion is -> "<< endl;
+    t.traverse();
+    // cout << endl << "Tree size -> " << sizeof(t) << endl;
 }
