@@ -88,3 +88,5 @@ If the target lies in a internal node and the deletion of a key leads to a fewer
 Best case time complexity: `0 (log n)`
 Average and worst case space complexity: `0(n)` 
 
+# B+ Trees:
+This is an advanced form of a self-balancing tree in which all values are present at leaf level. It is important to understand multi-level indexing before B+ trees. Multi-level indexing makes accessing data easier and faster. 
