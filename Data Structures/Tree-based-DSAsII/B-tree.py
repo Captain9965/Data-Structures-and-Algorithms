@@ -120,10 +120,85 @@ class BTree:
             self.delete_merge(x, i, i + 1)
             self.delete_internal_node(x.child[i], k, self.t - 1)
     
+    #delete the predecessor:
+    def delete_predecessor(self, x):
+        if x.leaf:
+            return x.pop()
+        n = len(x.keys) - 1
+        if len(x.child[n].keys) >= self.t:
+            self.delete_sibling(x, n + 1, n)
+        else:
+            self.delete_merge(x, n, n + 1)
+        self.delete_predecessor(x.child[n])
+
+    def delete_successor(self, x):
+        if x.leaf:
+            return x.keys.pop(0)
+        if len(x.child[1].keys) >= self.t:
+            self.delete_sibling(x, 0, 1)
+        else:
+            self.delete_merge(x, 0, 1)
+        self.delete_successor(x.child[0])
     
+    #delete resolution:
+    def delete_merge(self, x, i, j):
+        cnode = x.child[i]
+
+        if j  > i:
+            rsnode = x.child[j]
+            cnode.keys.append(x.keys[i])
+            for k in range(len(rsnode.keys)):
+                cnode.keys.append(rsnode.keys[k])
+                if len(rsnode.child) > 0:
+                    cnode.child.append(rsnode.child[k])
+            if len(rsnode.child) > 0:
+                cnode.child.append(rsnode.child.pop())
+            new = cnode
+            x.keys.pop(i)
+            x.child.pop(j)
+        else:
+            lsnode = x.child[i]
+            lsnode.keys.append(x.keys[j])
+            for i in range(len(cnode.keys)):
+                lsnode.keys.append(cnode.keys[i])
+                if len(lsnode.child) > 0:
+                    lsnode.child.append(cnode.child[i])
+            if len(lsnode.child) > 0:
+                lsnode.child.append(cnode.child.pop())
+            new = lsnode
+            x.keys.pop(j)
+            x.child.pop(i)
+
+        if x == self.root and len(x.keys) == 0:
+            self.root = new
+    
+    #delete sibling:
+    def delete_sibling(self, x, i, j):
+        cnode = x.child[i]
+        if i < j:
+            rsnode = x.child[j]
+            cnode.keys.append(x.keys[i])
+            x.keys[i] = rsnode.keys[0]
+            if len(rsnode.child) > 0:
+                cnode.child.append(rsnode.child[0])
+                rsnode.child.pop(0)
+            rsnode.keys.pop(0)
+        else:
+            lsnode = x.child[j]
+            cnode.keys.insert(0, x.keys[i - 1])
+            x.keys[i - 1] = lsnode.keys.pop()
+
+            if len(lsnode.child) > 0:
+                cnode.child.insert(0, lsnode.child.pop())
+            
+
+
 
 if __name__ == "__main__":
     B = BTree(3)
     for i in range(10):
         B.insert((i, 2 * i))
+    B.printTree(B.root)
+    B.delete(B.root, (6,))
+    print("\n")
     B.printTree(B.root)
