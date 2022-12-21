@@ -278,3 +278,9 @@ To retain the properties of a red-black tree:
         - Set `x` as the root of the tree
 3. Else the same as above with right changed with left and vice-versa.
 4. Set the colour of `x` as black.
+
+### Applications of Red Black Trees:
+1. Implementing finite maps.
+2. Implementing java packages: `java.util.TreeMap` and `java.util.TreeSet`
+3. To implement standard template libraries (STL) in cpp: multiset, multimap, map
+4. In Linux kernel.
