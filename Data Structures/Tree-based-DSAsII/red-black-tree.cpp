@@ -248,8 +248,178 @@ class RedBlackTree{
                 printHelper(root->right, indent, true);
             }
         }
-        
+    public:
+        RedBlackTree(){
+            TNULL = new Node;
+            TNULL->color = BLACK;
+            TNULL->left = nullptr;
+            TNULL->right = nullptr;
+            root = TNULL;
+        }
 
+        void preOrder(){
+            preOrderHelper(this->root);
+        }
 
-        
+        void inOrder(){
+            inOrderHelper(this->root);
+        }
+
+        void postOrder(){
+            postOrderHelper(this->root);
+        }
+
+        NodePtr searchTree(int k){
+            return searchTreeHelper(this->root, k);
+        }
+
+        NodePtr minimum(NodePtr node){
+            while(node->left != TNULL){
+                node = node->left;
+            }
+            return node;
+        }
+
+        NodePtr maximum(NodePtr node){
+            while(node->right != TNULL){
+                node = node->right;
+            }
+            return node;
+        }
+
+        NodePtr successor(NodePtr x){
+            if (x->right != TNULL) {
+                return minimum(x->right);
+            }
+
+            NodePtr y = x->parent;
+            while (y != TNULL && x == y->right) {
+                x = y;
+                y = y->parent;
+            }
+            return y;
+        }
+
+        NodePtr predecessor(NodePtr x){
+            if (x->left != TNULL) {
+                return maximum(x->left);
+            }
+
+            NodePtr y = x->parent;
+            while (y != TNULL && x == y->left) {
+                x = y;
+                y = y->parent;
+            }
+            return y;
+        }
+        void leftRotate(NodePtr x){
+            NodePtr y = x->right;
+            x->right = y->left;
+            if (y->left != TNULL) {
+                y->left->parent = x;
+            }
+            y->parent = x->parent;
+            if (x->parent == nullptr) {
+                this->root = y;
+            } else if (x == x->parent->left) {
+                x->parent->left = y;
+            } else {
+                x->parent->right = y;
+            }
+            y->left = x;
+            x->parent = y;
+        }
+
+        void rightRotate(NodePtr x){
+            NodePtr y = x->left;
+            x->left = y->right;
+            if (y->right != TNULL) {
+                y->right->parent = x;
+            }
+            y->parent = x->parent;
+            if (x->parent == nullptr) {
+                this->root = y;
+            } else if (x == x->parent->right) {
+                x->parent->right = y;
+            } else {
+                x->parent->left = y;
+            }
+            y->right = x;
+            x->parent = y;
+        }
+
+        void insert(int key){
+            NodePtr node = new Node;
+            node->parent = nullptr;
+            node->data = key;
+            node->left = TNULL;
+            node->right = TNULL;
+
+            node->color = RED;
+            NodePtr y = nullptr;
+            NodePtr x = this->root;
+
+            while (x != TNULL){
+                y = x;
+                if (node->data < x->data){
+                    x = x->left;
+                } else{
+                    x = x->right;
+                }
+            }
+
+            node->parent = y;
+            if (y == nullptr){
+                root = node;
+            } else if(node->data < y->data){
+                y->left = node;
+            } else{
+                y->right = node;
+            }
+
+            if (node->parent == nullptr){
+                node->color = BLACK;
+                /* no need to balance */
+                return;
+            }
+            if (node->parent->parent == nullptr){
+                /* no need to balance */
+                return;
+            }
+            /* balance the tree: */
+            insertFix(node);
+
+        }
+
+        NodePtr getRoot(){
+            return this->root;
+        }
+
+        void deleteNode(int key){
+            deleteNodeHelper(this->root, key);
+        }
+
+        void printTree(){
+            if(root){
+                printHelper(this->root, "", true);
+            }
+        }      
 };
+
+int main(){
+    RedBlackTree rbt = RedBlackTree();
+    rbt.insert(55);
+    rbt.insert(40);
+    rbt.insert(65);
+    rbt.insert(60);
+    rbt.insert(75);
+    rbt.insert(57);
+
+    rbt.printTree();
+
+    cout << endl << "After deleting 40 -> " << endl;
+
+    rbt.deleteNode(40);
+
+    rbt.printTree();
+}
