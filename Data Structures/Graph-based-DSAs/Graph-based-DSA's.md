@@ -100,3 +100,25 @@ In the case of undirected graphs, the matrix is symmetrical about the diagonal b
 ### Applications of an adjacency matrix:
 1. Creating routing tables in networks.
 2. Navigation tasks.
+
+## Adjacency List:
+A graph is represented as an array of linked lists with each index of the array representing a vertex and each linked list represents other vertices which have an edge with the vertex.
+
+### Pros:
+1. Efficient in terms of storage because we only need to store values for the edges.
+2. Also helps to find the vertices that are adjacent to a vertex easily. 
+
+### Cons:
+1. Finding the adjacent list is not quicker than the adjacent matrix because all connected nodes must first be explored to find them.
+
+### Adjacency List structure:
+
+The simplest implementation needs a node structure to store a vertex and a graph data structure to organize the nodes.
+
+To stay close to the basic definition of a graph(a collection of edges and vertices), we use an unlabelled graph as opposed to an unlabelled one. ie. vertices are identified by the indices 0, 1, 2..
+
+## Applications of an Adjacent List:
+1. It is faster to use an adjacent list for graphs having less number of edges
+
+
+
