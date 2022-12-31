@@ -73,3 +73,30 @@ It runs in linear time .i.e `0(V + E)`
 1. vehicle routing applications
 2. Maps
 3. Model checking in formal verification.
+
+
+## Adjacency Matrix:
+This is a way of representing a graph as a matrix of booleans, with the boolean value indicating whether there is a direct path between 2 vertices.
+
+
+Each cell in the matrix is represented as `Aij` where `i` and `j` are the vertices. 
+
+In the case of undirected graphs, the matrix is symmetrical about the diagonal because of every edge (i, j), there is also an edge (j, i).
+
+### Pros of an adjacency matrix:
+1. the basic operations such as checking whether there is an edge from one vertex to another, removing and adding an edge are extremely time efficient, constant time operations.
+
+2. If the graph is dense and there is a large number of edges, an adjacency matrix should be the first choice. Even if it is sparse, we can represent it using data structures for sparse matrices.
+
+3. The use of matrices lends itself to recent hardware accelerations especially in GPUs.
+
+4. Performing operations on an adjacency matrix can give many insights on the nature of the graph and the relationships between the vertices.
+
+### Cons of an adjacency matrix:
+
+1. The `V * V` space requirement makes it a memory hog. Graphs out in the wild usually do not have too many connections and this is why adjacency lists are preferred for most tasks.
+2. While basic operations are easy, others like `inEdges` and `outEdges` are 
+
+### Applications of an adjacency matrix:
+1. Creating routing tables in networks.
+2. Navigation tasks.
