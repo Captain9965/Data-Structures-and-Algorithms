@@ -120,5 +120,18 @@ To stay close to the basic definition of a graph(a collection of edges and verti
 ## Applications of an Adjacent List:
 1. It is faster to use an adjacent list for graphs having less number of edges
 
+## Depth first search:
+
+This is a recusive algorithm for traversing all the vertices of a tree or graph data structure.
+
+Each vertex is categorized as visited or not visited.The purpose of the algorithm is to mark vertices as visited while avoiding cycles.
+
+Working:
+1. Start by putting any of the vertices on top of a stack.
+2. Take the item on top of the stack and mark it as visited.
+3. Create a list of that vertex's adjacent nodes.Add the ones that aren't visited to the top of the stack
+4. Keep repeating until the stack is empty.
+
+
 
 
