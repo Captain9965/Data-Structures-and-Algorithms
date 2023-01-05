@@ -132,6 +132,25 @@ Working:
 3. Create a list of that vertex's adjacent nodes.Add the ones that aren't visited to the top of the stack
 4. Keep repeating until the stack is empty.
 
+## Complexity of DFS algorithm:
+Time complexity is `0(V + E)`
+Space complexity is `0(V)`
+
+## Application of DFS:
+1. For finding the path.
+2. to test whether a graph is bipartite.
+3. finding strongly connected components in graphs.
+4. detecting cycles in graphs
+
+
+
+## Breadth first Search(BFS):
+
+1. Start by putting any one of the graph's vertices at the back of a queue.
+2. Take the front item of the queue and add it to the visited list.
+3. Create a list of that vertex's adjacent nodes. Add the ones that are not visited to back of the queue.
+4. Keep repeating this until the queue is empty.
+
 
 
 
