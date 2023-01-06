@@ -153,4 +153,32 @@ Space complexity is `0(V)`
 
 
 
+## Bellman Ford's Algorithm:
+
+Helps us find the shortest path from a vertex to all other vertices of a weighted graph.
+
+Similar to Dijkstra's algorithm but it can work with graphs in which edges can have negative weights.
+
+
+### why negative weights:
+
+They may be used to represent phenomena like cashflow, heat loss/absorption etc. 
+We have to be careful with negative weight edges because they can introduce negative weight cycles i.e. a cycle that will reduce the total path distance by coming back to the same point.
+
+shortest path algorithms like Dijkstra's algorithm are unable to detect such a cycle and can give an incorrect result because they can go through a negative weight cycle and reduce the path length.
+
+## Working of Bellman Ford's algorithm:
+
+It starts by overestimating the length of the path from one vertex to all other vertices. It then interatively relaxes those estimates by finding shorter paths than the previously overestimated paths. 
+
+By doing this for all the vertices, we can guarantee that the result is optimized.
+
+### Bellman Ford's pseudocode:
+
+We need to maintain the distance of every vertex. We can store that in any array of size `V`.
+
+We want to know the length of the shortes path and the shortest path as well. For this, we map each vertex to the vertex that last updated its path.
+
+Once the algorithm is over, we can backtrack from the destination vertex to the source vertex to find the path.
+
 
