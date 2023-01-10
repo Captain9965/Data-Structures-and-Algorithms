@@ -182,3 +182,19 @@ We want to know the length of the shortes path and the shortest path as well. Fo
 Once the algorithm is over, we can backtrack from the destination vertex to the source vertex to find the path.
 
 
+## Bellman Ford's complexity:
+Time complexity:
+
+Best case complexity -> `O(E)`
+Average and worst case complexity -> `O(VE)`
+
+Space complexity:
+
+Space complexity -> `O(V)`
+
+## Applications:
+
+1. Calculating shortest paths in routing algorithm.
+2. for finding the shortest path.
+
+
