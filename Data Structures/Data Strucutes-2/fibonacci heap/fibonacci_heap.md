@@ -72,3 +72,6 @@ The value of a key is decreased to a lower value. The following functions are us
 2. Apply decrease-key operation to decrease the key to its lowest possible value.(i.e - infinity)
 3. Apply extract-min to remove this key
 
+### Complexity:
+Decrease key: 0(1)
+Delete node: 0(log n)
