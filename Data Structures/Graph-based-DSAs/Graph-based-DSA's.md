@@ -120,5 +120,81 @@ To stay close to the basic definition of a graph(a collection of edges and verti
 ## Applications of an Adjacent List:
 1. It is faster to use an adjacent list for graphs having less number of edges
 
+## Depth first search:
+
+This is a recusive algorithm for traversing all the vertices of a tree or graph data structure.
+
+Each vertex is categorized as visited or not visited.The purpose of the algorithm is to mark vertices as visited while avoiding cycles.
+
+Working:
+1. Start by putting any of the vertices on top of a stack.
+2. Take the item on top of the stack and mark it as visited.
+3. Create a list of that vertex's adjacent nodes.Add the ones that aren't visited to the top of the stack
+4. Keep repeating until the stack is empty.
+
+## Complexity of DFS algorithm:
+Time complexity is `0(V + E)`
+Space complexity is `0(V)`
+
+## Application of DFS:
+1. For finding the path.
+2. to test whether a graph is bipartite.
+3. finding strongly connected components in graphs.
+4. detecting cycles in graphs
+
+
+
+## Breadth first Search(BFS):
+
+1. Start by putting any one of the graph's vertices at the back of a queue.
+2. Take the front item of the queue and add it to the visited list.
+3. Create a list of that vertex's adjacent nodes. Add the ones that are not visited to back of the queue.
+4. Keep repeating this until the queue is empty.
+
+
+
+## Bellman Ford's Algorithm:
+
+Helps us find the shortest path from a vertex to all other vertices of a weighted graph.
+
+Similar to Dijkstra's algorithm but it can work with graphs in which edges can have negative weights.
+
+
+### why negative weights:
+
+They may be used to represent phenomena like cashflow, heat loss/absorption etc. 
+We have to be careful with negative weight edges because they can introduce negative weight cycles i.e. a cycle that will reduce the total path distance by coming back to the same point.
+
+shortest path algorithms like Dijkstra's algorithm are unable to detect such a cycle and can give an incorrect result because they can go through a negative weight cycle and reduce the path length.
+
+## Working of Bellman Ford's algorithm:
+
+It starts by overestimating the length of the path from one vertex to all other vertices. It then interatively relaxes those estimates by finding shorter paths than the previously overestimated paths. 
+
+By doing this for all the vertices, we can guarantee that the result is optimized.
+
+### Bellman Ford's pseudocode:
+
+We need to maintain the distance of every vertex. We can store that in any array of size `V`.
+
+We want to know the length of the shortes path and the shortest path as well. For this, we map each vertex to the vertex that last updated its path.
+
+Once the algorithm is over, we can backtrack from the destination vertex to the source vertex to find the path.
+
+
+## Bellman Ford's complexity:
+Time complexity:
+
+Best case complexity -> `O(E)`
+Average and worst case complexity -> `O(VE)`
+
+Space complexity:
+
+Space complexity -> `O(V)`
+
+## Applications:
+
+1. Calculating shortest paths in routing algorithm.
+2. for finding the shortest path.
 
 
