@@ -84,7 +84,7 @@ bool delete_key(TrieNode * root, string & word){
     }
     /* The deleted word shares a prefix with other words in the trie:*/
     if (lastBranchNode != nullptr){
-        lastBranchNode->childNode[lastBranchChar] = nullptr;
+        lastBranchNode->childNode[lastBranchChar - 97] = nullptr;
         return true;
      }
      /* the deleted word doesn't share any common prefix with any other word in the trie:*/
