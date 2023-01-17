@@ -38,3 +38,21 @@ Similar to insertion the only difference being that whenever we find the array o
 Note that we can search for a given prefix or existance of a word in the trie.
 
 For searching a complete word however, we have an additional check whether the word is ending at the last character or not.
+
+## Deletion in tie data structure:
+
+### 1. The deleted word is a prefix of other words in the trie:
+In this case, just decrement the word count by 1 at the end of the node.
+### 2. The deleted word shares a prefix with other words in the trie:
+Just delete all the nodes starting from the end of the prefix to the last character of the given word.
+
+
+### 3. The deleted word doesn't share a prefix with other words in the trie:
+Just delete all the nodes.
+
+## Implementation of a tried data structure:
+1. Create a root node with the TrieNode() constructor.
+2. Store a collection of strings that we have to insert in a vector of strings say, arr.
+3. Insert all strings with the help of insertKey() function.
+4. Search strings with searchQueryString with the help of search_key()
+5. Delete all strings with the help of deleteQueryString with the help of delete_key() 
