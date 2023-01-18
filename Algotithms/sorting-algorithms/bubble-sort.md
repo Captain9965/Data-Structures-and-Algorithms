@@ -1,3 +1,5 @@
+# Searching and sorting algorithms:
+
 # Bubble sort algorithm:
 
 This algorithm compares 2 adjacent elements and swaps them until they are in the intended order.
@@ -57,4 +59,27 @@ Is 0(1) since 1 extra variable is used for swapping. If one extra variable is us
 ## Applications:
 1. If complexity does not matter.
 2. Shorter code is preferred.
+
+# Selection sort algorithm:
+This is an algorithm that selects the smallest element from an unsorted list in each iteration and places that element at the beginning of the list
+
+## working:
+1. Select the first element as `miniumum`.
+2. Compare `mininum` with the second element and if it is smaller than `minimum`, assign it as the new `minimum`. This goes on until the last element.
+3. This minimum is swapped and placed at the front of the list
+4. for each iteration, indexing starts from the first unsorted elements.    
+
+## Algorithm:
+```
+selectionSort(array, size)
+  repeat (size - 1) times
+  set the first unsorted element as the minimum
+  for each of the unsorted elements
+    if element < currentMinimum
+      set element as new minimum
+  swap minimum with first unsorted position
+end selectionSort
+```
+
+
 
