@@ -81,5 +81,21 @@ selectionSort(array, size)
 end selectionSort
 ```
 
+## Complexity:
+```
+Time Complexity	 
+Best	            O(n2)
+Worst	            O(n2)
+Average	          O(n2)
+Space Complexity	O(1)
+Stability	        No
+```
 
+The time complexity is the same in all cases. This is because at every step, you have to find the minimum element and this cannot be known if the end of the array is not reached.
 
+## Applications:
+Used when: 
+1. A small list is to be sorted.
+2. cost of swapping does not matter.
+3. checking of all elements is mandatory.
+4. cost of writing to memory matters like in flash memory(number of write/swaps is 0(n) as compared to 0(n2) of bubble sort)
