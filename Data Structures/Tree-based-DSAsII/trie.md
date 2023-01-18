@@ -56,3 +56,32 @@ Just delete all the nodes.
 3. Insert all strings with the help of insertKey() function.
 4. Search strings with searchQueryString with the help of search_key()
 5. Delete all strings with the help of deleteQueryString with the help of delete_key() 
+
+## Complexity analysis of the trie data structure:
+```
+Operation	Time Complexity	Auxiliary Space
+Insertion	O(n)	        O(n*m)
+Searching	O(n)	        O(1)
+Deletion	O(n)	        O(1)
+```
+
+Where n is the size of the string and m is the number of strings stored in the trie.
+
+## Applications of the trie data structure:
+
+1. Autocomplete functionality in browsers
+2. Spell checkers based on what one types, suggesting alternatives. check word in data dictionary-> generate potential suggestions-> sort suggenstions with those of higher priority on top
+3. Longest prefix matching algorithm used in networking fo routing devices in IP networking.
+
+## Advantages of a trie data structure:
+
+1.  Allows us to find strings in 0(n) time where n is the length of the string. Faster than both hash tables and BST's.
+2. Provides alphabetic filtering of all the words making it easier to sort the words
+3. Takes less space than BST's since the keys are not explicitly stored.
+4. Efficiency in prefix search
+5. No need for a hash function hence faster than a hash table.
+
+## Disadvantages:
+
+1. Takes a lot of memory since each node contains pointers equal to the worst case number of characters.
+2. And efficient enough hash table with a good hash function can be faster with lookup in the order of 0(1)
