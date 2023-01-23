@@ -146,3 +146,65 @@ It is `0(1)` due to the extra variable `key` that is used.
 ### Applications:
 1. The array has a small number of elements.
 2. There only a few number of elements to be sorted.
+
+# Merge Sort algorithm:
+This is based on the principle of divide and conquer algorithm. 
+Here, a problem is divided into multiple sub-problems and each sub-problem is solved seperately. Finally, sub-problems are combined into the final solution.
+
+## Divide and conquer algorithm:
+Supposing we have an array `A`, a subproblem  would be to sort a sub-section of this array starting at index `p` and ending at index `r`, denoted as `A[p...r]`
+
+## Divide:
+If `q` is the halfway point between `p` and `r`, then we can split the subarray A[p...r] into 2 arrays: A[p...q] and A[q + 1, r]
+
+## conquer:
+In this step, we try to sort the subarrays A[p...q] and A[q...r]...If we haven't reached the base yet, we try to split the subarray again and again try to sort.
+
+## Combine:
+When the conquer array reaches the base step and we get 2 sorted subarrays, we we combine the results to get a sorted array A[p..r]
+
+## Algorithm theory:
+The mergesort function repeatedly divides the array into 2 halves until we reach  a stage where we try to perform mergesort on an array of size 1. i.e p == r.
+
+After that, the merge funciton comes to play and combines the sorted arrays into a larger array until the whole array is merged.
+
+```
+MergeSort(A, p, r):
+    if p > r 
+        return
+    q = (p+r)/2
+    mergeSort(A, p, q)
+    mergeSort(A, q+1, r)
+    merge(A, p, q, r)
+```
+To sort an entire array, we need to call `MergeSort(A, 0, length(A) - 1)`
+
+### The merge step:
+
+Every recursive algorithm is dependent on a base case and the ability to combine the results from the base cases. The most important step being the merge step.
+
+The algorithm maintains 3 pointers, one for each array and the third for maintaining the current index of the final sorted array.
+
+```
+Have we reached the end of any of the arrays?
+    No:
+        Compare current elements of both arrays 
+        Copy smaller element into sorted array
+        Move pointer of element containing smaller element
+    Yes:
+        Copy all remaining elements of non-empty array
+```
+### Merge sort complexity:
+```
+
+Time Complexity	 
+Best	            O(n*log n)
+Worst	            O(n*log n)
+Average         	O(n*log n)
+Space Complexity	O(n)
+Stability	        Yes
+```
+## Applications:
+1. Inversion count problems
+2. External 
+3. E-commerce applications
