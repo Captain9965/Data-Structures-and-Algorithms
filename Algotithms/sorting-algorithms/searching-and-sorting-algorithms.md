@@ -208,3 +208,59 @@ Stability	        Yes
 1. Inversion count problems
 2. External 
 3. E-commerce applications
+
+# Quick sort algorithm:
+
+Also uses the divide and conquer approach whereby:
+1. An array is divided into sub-arrays by selecting a pivot element. While selecting it, it should be positioned in such a way that elements less than it are to the left and those greater than it are to the right.
+2. The left and right sub-arrays are divided in like manner until each sub-array consists of one element.
+3. At this point, elements are already sorted and are then combined to form the sorted array.
+
+## Working of the algorithm:
+1. Selecting the pivot element: we can select the righmost element.
+2. Re-arrange the array such that elements that are smaller are to the left while those that are greater are to the right, in any order
+    - A pointer is fixed at the pivot element. This is compared with the elements beginning from the first index.
+    - If it is > pivot element, a second pointer is set for that element.
+    - Now, pivot is compared to other elements. If an element smaller than the pivot element is reached, it is swapped with the larger element found earlier.
+    - Again the process is repeated to set the next greater element as the second pointer. And swap it with another smaller element.
+    - This goes on until the second last element is reached.
+    - Finally, the second pointer is swapped with the second pointer.
+3. Divide sub-arrays:
+
+    Pivot elements are chosen for the left and right  sub-arrays seperately. and step 2 is repeated.
+
+4. Once each sub-array is a single element, then the array is already sorted.
+
+## Algorithm:
+```
+quickSort(array, leftmostIndex, rightmostIndex)
+  if (leftmostIndex < rightmostIndex)
+    pivotIndex <- partition(array,leftmostIndex, rightmostIndex)
+    quickSort(array, leftmostIndex, pivotIndex - 1)
+    quickSort(array, pivotIndex, rightmostIndex)
+
+partition(array, leftmostIndex, rightmostIndex)
+  set rightmostIndex as pivotIndex
+  storeIndex <- leftmostIndex - 1
+  for i <- leftmostIndex + 1 to rightmostIndex
+  if element[i] < pivotElement
+    swap element[i] and element[storeIndex]
+    storeIndex++
+  swap pivotElement and element[storeIndex+1]
+return storeIndex + 1
+```
+
+## Quick sort complexity:
+```
+Time Complexity	 
+Best	            O(n*log n)
+Worst	            O(n2)
+Average	            O(n*log n)
+Space Complexity	O(log n)
+Stability	        No
+```
+## Application:
+Used when:
+1. The programming language is good for recursion.
+2. Time complexity matters
+3. space complexity matters
