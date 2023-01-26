@@ -264,3 +264,52 @@ Used when:
 1. The programming language is good for recursion.
 2. Time complexity matters
 3. space complexity matters
+
+
+# Counting sort:
+
+This algorithm sorts an array by counting the number of unique occurrences of an element in the array. The count is stored in an auxiliary array and sorting is done by mapping the count as an index of the auxiliary array.
+
+## Working: 
+1. Find out the maximum element from the given array `max`.
+2. Initialize an array of length ` max + 1` with all elements 0. This is used for storing the count of elements in the array.
+3. Store the count of each element at their respective index in `count` array. 
+4. Store cummulative sum of elements in the `count` array.
+5. Find the index of each element of the original array in the count array. Place the element at the index calculated.
+6. After placing each element at its correct position, decrease its count by 1.
+
+## Algorithm:
+```
+countingSort(array, size)
+  max <- find largest element in array
+  initialize count array with all zeros
+  for j <- 0 to size
+    find the total count of each unique element and 
+    store the count at jth index in count array
+  for i <- 1 to max
+    find the cumulative sum and store it in count array itself
+  for j <- size down to 1
+    restore the elements to array
+    decrease count of each element restored by 1
+```
+
+## Time complexity:
+```
+Complexity	 
+Best	            O(n+k)
+Worst	            O(n+k)
+Average	            O(n+k)
+Space Complexity	O(max)
+Stability	        Yes
+```
+
+where `k` is the max element and `n` is the number of elements to be sorted. 
+The complexity is the same since no matter how the elements are placed in the array, the algorithm goes through `n + k` times.
+Bad if the intergers are very large because an array of that size should be made.
+
+## Space complexity:
+This is O(max) because the larger the range of elements, the larger the space complexity.
+
+## Applications:
+1. Used when there are smaller integers with multiple counts.
+2. Linear complexity is needed.
