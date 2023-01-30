@@ -313,3 +313,38 @@ This is O(max) because the larger the range of elements, the larger the space co
 ## Applications:
 1. Used when there are smaller integers with multiple counts.
 2. Linear complexity is needed.
+
+# Radix sort:
+This is a sorting algorithm that sorts elements by first  grouping the individual digits of the same place value.
+Then sort the elements according to their increasing or decreasing order.
+
+Uses the counting sort algorithm. 
+
+## Working:
+1. Find the largest element in the array, and let it be `max`. Let also the number of digits in `max` be `x`. `x` is calculated because we have to go through all the significant places of all the elements.
+
+2. Go through each significant place one by one..using any stable sorting technique to sort the digits at every signifiant place.
+
+3. Sort the units place, then the tens place, then the hundreds place.
+
+# Algorithm:
+```
+radixSort(array)
+  d <- maximum number of digits in the largest element
+  create d buckets of size 0-9
+  for i <- 0 to d
+    sort the elements according to ith place digits using countingSort
+
+countingSort(array, d)
+  max <- find largest element among dth place elements
+  initialize count array with all zeros
+  for j <- 0 to size
+    find the total count of each unique digit in dth place of elements and
+    store the count at jth index in count array
+  for i <- 1 to max
+    find the cumulative sum and store it in count array itself
+  for j <- size down to 1
+    restore the elements to array
+    decrease count of each element restored by 1
+  ```
+  
