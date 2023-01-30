@@ -347,4 +347,24 @@ countingSort(array, d)
     restore the elements to array
     decrease count of each element restored by 1
   ```
-  
+
+  # Radix sort complexity:
+
+  ```
+Time Complexity	 
+Best	            O(n+k)
+Worst	            O(n+k)
+Average	            O(n+k)
+Space Complexity	O(max)
+Stability	        Yes
+```
+  since its a non-comparative algorithm, it has an advantage over comparative sorting algorithms. For the radix sort that uses conting sort as an intermediate stable sort, the time complexity is `O(d(n + k))` where `d` is the number cycle and `O(n + k)` is the time complexity of counting sort. 
+  Thus, radix sort has linear time complexity which is better than `O(n log n)` of comparative sorting algorithms.
+
+  It therefore can perform in linear time with numbers of other bases. However, intermediate sort takes large space. This is why it is not used in software libraries.
+
+
+  ## Applications:
+
+  1. DC3 algorithm ( karkkainnen-Sanders-Burkhadt ) algorithm while making a suffix array.
+  2. Places where there are numbers in large ranges.
