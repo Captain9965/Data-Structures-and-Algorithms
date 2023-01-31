@@ -368,3 +368,58 @@ Stability	        Yes
 
   1. DC3 algorithm ( karkkainnen-Sanders-Burkhadt ) algorithm while making a suffix array.
   2. Places where there are numbers in large ranges.
+
+  # Bucket sorting algorithm:
+
+  This algorithm divides the unsorted array elements into several groups called buckets. Each bucket is then sorted by using any stable algorithm or recursively using the same bucket technique.
+
+  They are then combined to form the final sorted array.
+
+  ## Scatter Gather approach:
+  Here, elements are first scattered into buckets then elements in each bucket are sorted. Finally, the elements are gathered in order.
+
+  ## Working of the algorithm:
+
+  1. Given an array, initialize another array in which each slot will be used as buckets for storing elements.
+  2.  Insert elements into buckets from the array, each according to the range in the bucket. If it is a decimal, the element is * the least X to make it a mixed number. The floor value is used. If we take interger numbers as input, we have to divide it by the interval to get the floor value.
+  3. Each bucket is sorted using any stable sorting algorithm eg. quicksort.   
+  4. The elements from each array are gathered. This is done by iterating through each bucket and inserting an individual element into the original array in each cycle. Once copied into the original array, the element is erased from the bucket.
+
+  ## Algorithm:
+  ```
+  bucketSort()
+  create N buckets each of which can hold a range of values
+  for all the buckets
+    initialize each bucket with 0 values
+  for all the buckets
+    put elements into buckets matching the range
+  for all the buckets 
+    sort elements in each bucket
+  gather elements from each bucket
+  end bucketSort
+  ```
+
+## Complexity:
+```
+Time Complexity	 
+Best	            O(n+k)
+Worst	            O(n2)
+Average	            O(n)
+Space Complexity	O(n+k)
+Stability	        Yes
+```
+
+## Worst case complexity: 
+When the elements are in close range, they are likely to be placed in the same bucket, with some having more elements than others. 
+This makes bucket sort dependent on the complexity of the sorting algorithm used to sort the elements in the bucket. It gets even worse if the elements are in reverse order. 
+If insertion sort is used, the complexity becomes O(n2)
+
+## Best case complexity:
+Occurs when there are equal number of elements in each bucket, with the elements uniformly distributed. It even gets better when the elements in the bucket are already sorted. The complexity is therefore O(n + k) if we are using insertion sort. O(n) for making the buckets and O(k) for sorting the bucket elements using a linear time algorithm.
+
+## Average Case complexity:
+In this case, elements are randomly distributed in the array.
+
+## Applications:
+1. When input is uniformly distributed over a range.
+2. There are floating point values.
