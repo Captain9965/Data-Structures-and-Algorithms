@@ -56,8 +56,8 @@ void bucketSort(int * array){
 
     /* sort the elements of each bucket: */
 
-    for ( i = 0; i < NBUCKET; i ++){
-        insertionSort(buckets[i]);
+    for ( i = 0; i < NBUCKET; ++ i){
+        buckets[i] = insertionSort(buckets[i]);
 
     }
 
