@@ -16,7 +16,8 @@ struct Node{
 /* function forward declarations*/
 
 void bucketSort(int * array);
-struct Node * insertionSort(struct Node * list);
+void insertionSort(struct Node * list, struct Node ** sorted);
+void sortedInsert(struct Node * newNode, struct Node ** sorted);
 void printArray(int * array);
 void printBuckets(struct Node * list);
 int getBucketIndex(int value);
@@ -55,9 +56,11 @@ void bucketSort(int * array){
     }
 
     /* sort the elements of each bucket: */
-
+    struct Node * sorted;
     for ( i = 0; i < NBUCKET; ++ i){
-        buckets[i] = insertionSort(buckets[i]);
+        sorted = nullptr;
+        insertionSort(buckets[i], &sorted);
+        buckets[i] = sorted;
 
     }
 
@@ -93,50 +96,33 @@ void bucketSort(int * array){
 
 /* function to sort elements in each list: */
 
-struct Node * insertionSort(struct Node * list){
-    struct Node * k, * nodeList;
-    if(!list || !list->next){
-        return list;
+void insertionSort(struct Node * list, struct Node ** sorted){
+    Node * current = list;
+
+    /* traverse and insert every node to sorted: */
+    while (current){
+        Node * next = current->next;
+        sortedInsert(current, sorted);
+        current = next;
     }
+}
 
-    nodeList = list; 
-    k = list->next;
+void sortedInsert(struct Node * newNode, struct Node ** sorted){
 
-    nodeList->next = nullptr;
+    if (!(*sorted) || (*sorted)->data >= newNode->data){
+        newNode->next = (*sorted);
+        (*sorted) = newNode;
+        
+    } else{
+        Node * current = (*sorted);
 
-    while(k){
-        struct Node * ptr;
-        if(nodeList->data > k->data){
-            struct Node * tmp;
-            tmp = k;
-            k = k->next;
-            tmp->next = nodeList;
-            nodeList = tmp;
-            continue;
+        /* locate the node before point of insertion: */
+        while(current->next && current->next->data < newNode->data){
+            current = current->next;
         }
-
-        for (ptr = nodeList; ptr->next; ptr = ptr->next){
-            if (ptr->next->data > k->data){
-                break;
-            }
-        }
-
-        if (ptr->next){
-            struct Node * tmp;
-            tmp = k;
-            k = k->next;
-            tmp->next = ptr->next;
-            ptr->next = tmp;
-            continue;
-        } else{
-            ptr->next = k;
-            k = k->next;
-            ptr->next->next = nullptr;
-            continue;
-        }
-
+        newNode->next = current->next;
+        current->next = newNode;
     }
-    return nodeList;
 }
 
 int getBucketIndex(int value){
