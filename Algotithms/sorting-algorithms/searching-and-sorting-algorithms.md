@@ -313,3 +313,201 @@ This is O(max) because the larger the range of elements, the larger the space co
 ## Applications:
 1. Used when there are smaller integers with multiple counts.
 2. Linear complexity is needed.
+
+# Radix sort:
+This is a sorting algorithm that sorts elements by first  grouping the individual digits of the same place value.
+Then sort the elements according to their increasing or decreasing order.
+
+Uses the counting sort algorithm. 
+
+## Working:
+1. Find the largest element in the array, and let it be `max`. Let also the number of digits in `max` be `x`. `x` is calculated because we have to go through all the significant places of all the elements.
+
+2. Go through each significant place one by one..using any stable sorting technique to sort the digits at every signifiant place.
+
+3. Sort the units place, then the tens place, then the hundreds place.
+
+# Algorithm:
+```
+radixSort(array)
+  d <- maximum number of digits in the largest element
+  create d buckets of size 0-9
+  for i <- 0 to d
+    sort the elements according to ith place digits using countingSort
+
+countingSort(array, d)
+  max <- find largest element among dth place elements
+  initialize count array with all zeros
+  for j <- 0 to size
+    find the total count of each unique digit in dth place of elements and
+    store the count at jth index in count array
+  for i <- 1 to max
+    find the cumulative sum and store it in count array itself
+  for j <- size down to 1
+    restore the elements to array
+    decrease count of each element restored by 1
+  ```
+
+  # Radix sort complexity:
+
+  ```
+Time Complexity	 
+Best	            O(n+k)
+Worst	            O(n+k)
+Average	            O(n+k)
+Space Complexity	O(max)
+Stability	        Yes
+```
+  since its a non-comparative algorithm, it has an advantage over comparative sorting algorithms. For the radix sort that uses conting sort as an intermediate stable sort, the time complexity is `O(d(n + k))` where `d` is the number cycle and `O(n + k)` is the time complexity of counting sort. 
+  Thus, radix sort has linear time complexity which is better than `O(n log n)` of comparative sorting algorithms.
+
+  It therefore can perform in linear time with numbers of other bases. However, intermediate sort takes large space. This is why it is not used in software libraries.
+
+
+  ## Applications:
+
+  1. DC3 algorithm ( karkkainnen-Sanders-Burkhadt ) algorithm while making a suffix array.
+  2. Places where there are numbers in large ranges.
+
+  # Bucket sorting algorithm:
+
+  This algorithm divides the unsorted array elements into several groups called buckets. Each bucket is then sorted by using any stable algorithm or recursively using the same bucket technique.
+
+  They are then combined to form the final sorted array.
+
+  ## Scatter Gather approach:
+  Here, elements are first scattered into buckets then elements in each bucket are sorted. Finally, the elements are gathered in order.
+
+  ## Working of the algorithm:
+
+  1. Given an array, initialize another array in which each slot will be used as buckets for storing elements.
+  2.  Insert elements into buckets from the array, each according to the range in the bucket. If it is a decimal, the element is * the least X to make it a mixed number. The floor value is used. If we take interger numbers as input, we have to divide it by the interval to get the floor value.
+  3. Each bucket is sorted using any stable sorting algorithm eg. quicksort.   
+  4. The elements from each array are gathered. This is done by iterating through each bucket and inserting an individual element into the original array in each cycle. Once copied into the original array, the element is erased from the bucket.
+
+  ## Algorithm:
+  ```
+  bucketSort()
+  create N buckets each of which can hold a range of values
+  for all the buckets
+    initialize each bucket with 0 values
+  for all the buckets
+    put elements into buckets matching the range
+  for all the buckets 
+    sort elements in each bucket
+  gather elements from each bucket
+  end bucketSort
+  ```
+
+## Complexity:
+```
+Time Complexity	 
+Best	            O(n+k)
+Worst	            O(n2)
+Average	            O(n)
+Space Complexity	O(n+k)
+Stability	        Yes
+```
+
+## Worst case complexity: 
+When the elements are in close range, they are likely to be placed in the same bucket, with some having more elements than others. 
+This makes bucket sort dependent on the complexity of the sorting algorithm used to sort the elements in the bucket. It gets even worse if the elements are in reverse order. 
+If insertion sort is used, the complexity becomes O(n2)
+
+## Best case complexity:
+Occurs when there are equal number of elements in each bucket, with the elements uniformly distributed. It even gets better when the elements in the bucket are already sorted. The complexity is therefore O(n + k) if we are using insertion sort. O(n) for making the buckets and O(k) for sorting the bucket elements using a linear time algorithm.
+
+## Average Case complexity:
+In this case, elements are randomly distributed in the array.
+
+## Applications:
+1. When input is uniformly distributed over a range.
+2. There are floating point values.
+
+
+# Heap Sort:
+
+## Relationship between tree elements and array indices:
+If the index of any element is `i`, then the element in the index `2i + 1` will become the left child and the element in the index `2i + 2` will become the right child.
+
+Also, the parent of any element at index `i` is given by the lower bound of `(i -1)/2`
+
+## What is a heap data structure?
+
+A binary tree is said to follow a heap data structure if:
+
+1. It is a complete binary tree.
+2. All nodes in the tree follow a property that they are greater than their children i.e. the largest element is at the root and both of its children are smaller than the root in the case of max-heap. If all nodes are smaller than their children, then it is called a min-heap.
+
+## How to heapify a tree: 
+Starting from a complete binary tree, we can modify it to become a max-heap by calling a function called  "heapify" on all non-leaf elements of the heap.
+
+With just 3 elements, the algorithm would look like:
+```
+heapify(array)
+    Root = array[0]
+    Largest = largest( array[0] , array [2*0 + 1]. array[2*0+2])
+    if(Root != Largest)
+          Swap(Root, Largest)
+```
+To maintain the max-heap property in a tree where both sub-trees are max-heaps, we need to run heapify on the root element repeatedly until it is larger than its children or it becomes a leaf node. 
+
+
+## Building a max-heap:
+To build a max-heap from any tree, we can start by heapifying each sub-tree from the bottom up and we end up with a max-heap when heapify is applied on all elements including the root element.
+In the case of a complete binary tree, the first index of a non-leaf node is given by `n/2 -1`. All other nodes after that are leaf nodes and do not need to be heapified.
+
+Therefore:
+```
+    // Build heap (rearrange array)
+    for (int i = n / 2 - 1; i >= 0; i--)
+      heapify(arr, n, i);
+
+```
+## Working of the heap sort:
+1. Since the tree satisfies the max-heap property, then the largest item is stored at the root node. 
+2. Swap: remove the root element and put it at the end of the array. Put the last item of the tree at the vacant place. 
+3. Remove: reduce the size of the heap by 1. 
+4. Heapify the root element again such that we have the highest element at the root.
+5. Repeat the process until all the elements in the list are sorted.
+
+Operation:
+```
+    // Heap sort
+    for (int i = n - 1; i >= 0; i--) {
+      swap(&arr[0], &arr[i]);
+
+      // Heapify root element to get highest element at root again
+      heapify(arr, i, 0);
+    }
+```
+
+## Heap sort complexity:
+```
+Time Complexity	 
+Best	            O(nlog n)
+Worst	            O(nlog n)
+Average	            O(nlog n)
+Space Complexity	O(1)
+Stability	        No
+```
+The height of a tree containing `n` elements is `log n`. As we have seen, to fully heapify an element whose sub-trees are already max-heaps, we need to keep comparing its elements with its children and pushing it downwards until it reaches a point where both its children are smaller than it. ,
+
+In the worst case scenario, we need to move an element from the root, to the leaf node, making a multiple of `log n` comparisons and swaps.
+
+During the buld_max_heap stage, we do that for `n/2` elements so the worst case complexity of this stage is `n/2 * log n ~ n log n`
+
+During the sorting stage, after we swap, we may also need to push down the element from the root to the leaf hence `log n` complexity. We need to repeat this `n` times so `nlogn`
+
+These steps are exectuted one after another hence the algorithmic complexity remains in the order of `n log n`. 
+
+Also performs sorting in `O(1)` space complexity 
+
+In comparison with Quick sort, it has a better worst case. But in other cases, quick sort is fast. 
+
+An alternative is introsort which combines the worst case speed of heap sort and the average speed of quick sort. 
+
+## Applications:
+1. In systems concerned with security and embedded applications due to the `n log n` upper bound on running time and constant O(1) upper bound on the auxiliary space.
+
+2. The underlying data structure i.e. the heap data structure can be used if we want to efficiently extract the smallest or the largest element from a list without the overhead of having to keep all the elements in order. eg. priority queues
