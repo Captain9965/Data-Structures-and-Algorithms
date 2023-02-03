@@ -327,7 +327,7 @@ Uses the counting sort algorithm.
 
 3. Sort the units place, then the tens place, then the hundreds place.
 
-# Algorithm:
+## Algorithm:
 ```
 radixSort(array)
   d <- maximum number of digits in the largest element
@@ -348,7 +348,7 @@ countingSort(array, d)
     decrease count of each element restored by 1
   ```
 
-  # Radix sort complexity:
+  ## Radix sort complexity:
 
   ```
 Time Complexity	 
@@ -511,3 +511,23 @@ An alternative is introsort which combines the worst case speed of heap sort and
 1. In systems concerned with security and embedded applications due to the `n log n` upper bound on running time and constant O(1) upper bound on the auxiliary space.
 
 2. The underlying data structure i.e. the heap data structure can be used if we want to efficiently extract the smallest or the largest element from a list without the overhead of having to keep all the elements in order. eg. priority queues
+
+
+# Shell sort: 
+It is a genaralized version of the insertion sort algorithm. It first sorts elements that are far apart from each other and successively reduces the interval between the elements to be sorted. 
+
+The interval between the elements is reduces based on the interval used. Some of the optimal sequences used are: 
+1. Shell's original
+2. Knuth's increments
+3. Pratt's increments
+4. Hibbard's increments
+5. Sedgewick's increments
+6. Papernov's and Stasevich's increments
+
+The perfomance depends on the type of sequence used for a given input array. 
+
+## Working of shell sort:
+Using the shell's orignal sequence: `N/2, N/4....1`, 
+1. If the array size is 8, then elements lying at the interval of `N/2` are compared and swapped if not in order. 
+  - The `0th` element is compared with the `4th` element
+  - 
