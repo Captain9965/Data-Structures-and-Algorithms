@@ -527,7 +527,20 @@ The interval between the elements is reduces based on the interval used. Some of
 The perfomance depends on the type of sequence used for a given input array. 
 
 ## Working of shell sort:
-Using the shell's orignal sequence: `N/2, N/4....1`, 
+Using the shell's orignal sequence: `N/2, N/4....1`,
 1. If the array size is 8, then elements lying at the interval of `N/2` are compared and swapped if not in order. 
   - The `0th` element is compared with the `4th` element
-  - 
+  - If the `0th` element is greater than the `4th` element, then swap them.
+  - The process goes on for all remaining elements.
+  - Then rearrange at `N/2` intervals
+  - The same process goes on for the remaining elements.
+  - Finally the array elements lying at the interval of 1 are sorted. The array is now completely sorted.
+
+  ## Shell sort algorithm:
+```
+  shellSort(array, size)
+  for interval i <- size/2n down to 1
+    for each interval "i" in array
+        sort all the elements at interval "i"
+end shellSort
+```
