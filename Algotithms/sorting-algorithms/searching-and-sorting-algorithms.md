@@ -544,3 +544,38 @@ Using the shell's orignal sequence: `N/2, N/4....1`,
         sort all the elements at interval "i"
 end shellSort
 ```
+
+## Complexity:
+```
+Time Complexity	 
+Best	            O(nlog n)
+Worst	            O(n2)
+Average	            O(nlog n)
+Space Complexity	O(1)
+Stability	        No
+```
+
+This is an unstable algorithm because it doesnt examine the elements lying between the intervals.
+
+## Applications:
+1. When calling a stack is overhead.
+2. When recursion exceeds a limit.e.g. in `bzip2`
+3. Insertion sort does not perform well when the close elements are far apart. Shell sort helps in reducing the distance between those elements. Hence, there are less number  of swappings to be performed.
+
+# Linear Search:
+This is a sequential searching algorithm where we start from one end and check every element until the desired element is found.
+
+## Algorithm:
+  ```
+  LinearSearch(array, key)
+  for each item in the array
+    if item == value
+      return its index
+  ```
+## Complexity:
+Time complexity is `O(n)`
+Space complexity is `O(1)`
+
+## Applications:
+1. Searching operations in arrays of less than 100 items.
+
