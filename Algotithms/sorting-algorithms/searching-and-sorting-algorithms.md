@@ -579,3 +579,59 @@ Space complexity is `O(1)`
 ## Applications:
 1. Searching operations in arrays of less than 100 items.
 
+# Binary search:
+This is an algorithm for finding the position of an element in a sorted array. 
+
+## Working:
+We have the iterative and recursive methods.
+General steps:
+1. Set 2 pointers high and low at the highest and lowest positions respectively. 
+2. Find the middle element `mid` of the array ie. `arr[(low + high) / 2]`
+3. If `x == mid` then return `mid`. Else, compare the element to be searched with `mid`.
+4. If `x > mid`, compare `x` with the middle element on the right side of `mid` by setting `low = mid + 1`, otherwise compare with the middle element on the left side of `mid` by setting `high = mid - 1`.
+5. Repeat steps 2 - 4 until low meets high.
+
+## Algorithm:
+## Iterative method:
+```
+do until the pointers low and high meet each other.
+    mid = (low + high)/2
+    if (x == arr[mid])
+        return mid
+    else if (x > arr[mid]) // x is on the right side
+        low = mid + 1
+    else                       // x is on the left side
+        high = mid - 1
+```
+
+## Recursive method:
+```
+binarySearch(arr, x, low, high)
+    if low > high
+        return False 
+    else
+        mid = (low + high) / 2 
+        if x == arr[mid]
+            return mid
+        else if x > arr[mid]        // x is on the right side
+            return binarySearch(arr, x, mid + 1, high)
+        else                               // x is on  the right side
+            return binarySearch(arr, x, low, mid - 1)
+```
+
+## Complexity:
+```
+Time Complexities: 
+
+Best case complexity:       O(1)
+Average case complexity:    O(log n)
+Worst case complexity:      O(log n)
+```
+
+space complexity:
+
+The space complexity of binary search is `O(1)`.
+
+## Applications:
+1. In libraries of Java, .NET, C ++, STL.
+2. Pinpointing where the error happens while debugging.
