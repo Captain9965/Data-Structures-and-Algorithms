@@ -55,3 +55,51 @@ ___
  1. Water distribution pipeline.
  2. Bipartite matching problem.
  3. Circulation with demand
+
+ # Dijkstra's algorithm:
+This allows us to find the shortest path between any 2 vertices in a graph.
+Differs from the min spanning tree because this may not include all the vertices in the graph.
+
+## Working:
+It works on the basis that any subpath `B->D`of the shortest path `A->D`is also the shortest path between the vertices `B` and `D`.
+Djikstra used this property in the opposite direction.i.e. we overestimate the distance of each vertex from the starting vertex. Then we visit each node and its neighbours to find the shortest subpath to those neighbours.
+Uses the greedy approach since we find the next best approach hoping that the end result is the best solution for the problem.
+
+## Pseudocode:
+To maintain the path distance between the vertices, we use an array of size `v` where `v` is the number of vertices.
+to know the shortest path, we need to map each vertex to the vertex that last updated its path length. 
+
+Once the algorithm is over, we can backtrack from the destination vertex to the source vertex to find the path.
+
+A min priority queue can be used to efficiently receive the vertex with the least path distance.
+
+```
+function dijkstra(G, S)
+    for each vertex V in G
+        distance[V] <- infinite
+        previous[V] <- NULL
+        If V != S, add V to Priority Queue Q
+    distance[S] <- 0
+	
+    while Q IS NOT EMPTY
+        U <- Extract MIN from Q
+        for each unvisited neighbour V of U
+            tempDistance <- distance[U] + edge_weight(U, V)
+            if tempDistance < distance[V]
+                distance[V] <- tempDistance
+                previous[V] <- U
+    return distance[], previous[]
+```
+## Complexity:
+```
+- Time complexity is O(E log V) where E is the number of edges and V the number of vertices.
+
+- Space complexity is O(V)
+```
+
+## Application:
+1. Finding the shortest path.
+2. Social networking applications.
+3. In a telephone network.
+4. Finding locations in a map.
+
