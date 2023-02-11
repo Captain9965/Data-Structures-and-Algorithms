@@ -103,3 +103,22 @@ function dijkstra(G, S)
 3. In a telephone network.
 4. Finding locations in a map.
 
+# Kruskal's Minimum spanning tree algorithm:
+
+## What is a spanning tree?
+It is a subset of a connected graph G where all edges are connected i.e. one can traverse to any edge from a paritcular edge with or without intermediaries. It must not have any cycle in it. If there are N vertices in a connected graph, then the number of edges that a connected graph may have is N - 1. 
+
+## What is a minumum spanning tree?
+A minumum weight spanning tree for a connected, weighted or undirected graph is a spanning tree with a weight less than or equal to the weight of every other spanning tree. 
+
+## Working of Kruskal's:
+1. sort all edges from low weight to high weight.
+2. Take the edge with the lowest weight and add it to the spanning tree.If adding the edge created a cycle, then reject this edge. 
+3. Keep adding edges until we reach all vertices.
+
+## Kruskal's complexity:
+Time complexity is `O(E log E)`
+
+## Applications:
+1. Laying out electrical wiring.
+2. computer networks, LAN. 
