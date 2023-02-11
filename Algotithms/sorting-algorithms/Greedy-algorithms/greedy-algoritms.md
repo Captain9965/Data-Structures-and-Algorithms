@@ -122,3 +122,38 @@ Time complexity is `O(E log E)`
 ## Applications:
 1. Laying out electrical wiring.
 2. computer networks, LAN. 
+
+# Prim's algorithm:
+It always starts with a single node and it moves through several adjacent nodes in order to explore all the connected edges along the way
+
+It starts with an empty spanning tree. The idea is to maintain 2 sets of vertices. The first contains vertices already included in MST, and the other those not yet included. At every step, it considers all edges that connect the 2 sets and picks the minimum weight edge from these edges. After picking the edge, it moves the other endpoint of the edge to the set containing MST.
+
+## Working:
+1. Create a set mstSet that keeps track of vertices already included in MST.
+2. Assign a key value to all vertices in the input graph. Assign a value of INF to all key values. Assign a key value of 0 to the first vertex so that it is picked first.
+3. While mst doesnt include all vertices:
+    - Pick a vertex  u which is not there in mstSet and has a minimum key value.
+    - include u in the mstSet.
+    - Update the key values of all adjacent vertices of u. To update the key values, iterate through all adjacent vertices.for every adjacent vertex v, if the weight of u-v is less than the previous key value of v, update the key value as the weight of u-v 
+
+## Pseudocode:
+```
+PrimMST(graph G)
+	for each vertex v in G:
+		v.distance = infinity
+	start = arbitrary vertex
+	start.distance = 0
+	priorityQueue = all vertices in G
+	while priorityQueue is not empty:
+		u = vertex with smallest distance in priorityQueue
+		remove u from priorityQueue
+		for each neighbor v of u:
+			if v is in priorityQueue and weight(u, v) < v.distance:
+				v.distance = weight(u, v)
+				v.parent = u
+	return MST
+```
+## Complexity:
+Time complexity is `O(V2)` for an adjacency matrix implementation and `O(E log V)` for an binary heap and adjacency list implementation.
+
+Space complexity is `O(V)`
