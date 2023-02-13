@@ -157,3 +157,33 @@ PrimMST(graph G)
 Time complexity is `O(V2)` for an adjacency matrix implementation and `O(E log V)` for an binary heap and adjacency list implementation.
 
 Space complexity is `O(V)`
+
+# Huffman Coding:
+This is a lossless data compression algorithm. The idea is to assign variable-length codes to input characters with the length of the assigned codes being based on the frequencies of corresponding characters.
+
+The variable length codes assigned to input characters are prefix codes and are assigned in such a way that the code assigned to one character is not the prefix of code assigned to any other character. 
+
+Steps in Huffman coding:
+1. Building a Huffman tree from input characters.
+2. Traverse the Huffman tree and assign codes to the characters.
+
+## Building a Huffman tree:
+Input is an array of unique characters along with their frequency of occurrences and output is the Huffman Tree. 
+
+1. Create a leaf node for each unique character and build a minheap of all leaf nodes( min heap here is used as a priority queue). The value of the frequency field is used to compare 2 nodes min heap. Initially, the least frequent character is at the root.
+
+2. Extract 2 nodes with the minumum frequency from the heap. 
+3. Create a new internal node with a frequency equal to the sum of the 2 node frequencies. Make the first extracted node as its left child and the other its right child. Add this node to the minheap.
+4. Repeat steps 2 and 3 until the heap contains only one node. The remaining node is the root node and the tree is complete. 
+
+## Printing the codes:
+1. Traverse the tree formed, starting from the root. Maintain an auxiliary array. If we move to the left child, write 0 to the array. While moving to the right child, write 1 to the array.
+2. Print the array when a leaf node is encountered. 
+
+## Huffman coding complexity:
+Time complexity is `0(n log n)`
+Extracting minimum frequency from the queue takes place `2 *(n - 1)` times and its complexity is `0 (log n)`
+
+## Huffman coding applications:
+1. Used in conventional compression formats like GZIP, BZIP, PKZIP, 
+2.  Text and data transmission. 
