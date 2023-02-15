@@ -76,3 +76,20 @@ Space complexity is `O(n2)`
 2. To find the transitive closure in a directed graph.
 3. To find the inversion of real matrices.
 4. Testing whether a directed graph is bipartite. 
+
+
+# Longest Common Subsequence:
+This can be defined as the longest subsequence that is common to all sequences provided the elements of the subsequence are not required to occupy consecutive positions within the original sequences.
+
+The subsequence must strictly be an increasing sequence of the indices of both original sequences.
+
+## Using dynamic programming to find LCS:
+1. Create a table of dimensions `n + 1 * m + 1` where n and m are the lengths of the 2 sequences. Fill the first rows and columns with zeros.
+2. Fill each cell in the table with the following logic:
+3. If the character corresponding to the current row and column are matching, then fill the current cell by adding 1 to the diagonal element.Point an arrow to the diagonal cell.
+4. Else take the maximum value from the previous column and previous row element for filling the current cell. Point an arrow to the cell with maxiumum value.If they are equal, point to any of them.
+5. Fill the table accordingly. 
+6. The value of the last row and the last column is the length of the longest common subsequence.
+7. In order to find the LCS, follow the arrows from the last element. The elements corresponding to the () symbol is the LCS.
+
+## Efficiency versus recursive algorithm to find LCS:
