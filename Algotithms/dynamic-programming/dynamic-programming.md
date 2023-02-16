@@ -92,4 +92,26 @@ The subsequence must strictly be an increasing sequence of the indices of both o
 6. The value of the last row and the last column is the length of the longest common subsequence.
 7. In order to find the LCS, follow the arrows from the last element. The elements corresponding to the () symbol is the LCS.
 
-## Efficiency versus recursive algorithm to find LCS:
+## Efficiency of dynamic programming versus recursive algorithm to find LCS:
+Dynamic programming reduces the number of function calls. It also stores the results of each function call so that it can be used in future calls without the need for redundant calls. So time taken by a dynamic approach is the time taken to fill a table. i.e. `O(mn)` whereas for recursion it is `O(2max(m,n)`
+
+## Algorithm:
+```
+X and Y be two given sequences
+Initialize a table LCS of dimension X.length * Y.length
+X.label = X
+Y.label = Y
+LCS[0][] = 0
+LCS[][0] = 0
+Start from LCS[1][1]
+Compare X[i] and Y[j]
+    If X[i] = Y[j]
+        LCS[i][j] = 1 + LCS[i-1, j-1]   
+        Point an arrow to LCS[i][j]
+    Else
+        LCS[i][j] = max(LCS[i-1][j], LCS[i][j-1])
+        Point an arrow to max(LCS[i-1][j], LCS[i][j-1])
+```
+## application:
+1. compressing genome resequencing data
+2. Authenticating users within their mobile phone through in-air signatures.
