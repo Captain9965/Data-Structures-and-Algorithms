@@ -327,7 +327,7 @@ Uses the counting sort algorithm.
 
 3. Sort the units place, then the tens place, then the hundreds place.
 
-# Algorithm:
+## Algorithm:
 ```
 radixSort(array)
   d <- maximum number of digits in the largest element
@@ -348,7 +348,7 @@ countingSort(array, d)
     decrease count of each element restored by 1
   ```
 
-  # Radix sort complexity:
+  ## Radix sort complexity:
 
   ```
 Time Complexity	 
@@ -511,3 +511,127 @@ An alternative is introsort which combines the worst case speed of heap sort and
 1. In systems concerned with security and embedded applications due to the `n log n` upper bound on running time and constant O(1) upper bound on the auxiliary space.
 
 2. The underlying data structure i.e. the heap data structure can be used if we want to efficiently extract the smallest or the largest element from a list without the overhead of having to keep all the elements in order. eg. priority queues
+
+
+# Shell sort: 
+It is a genaralized version of the insertion sort algorithm. It first sorts elements that are far apart from each other and successively reduces the interval between the elements to be sorted. 
+
+The interval between the elements is reduces based on the interval used. Some of the optimal sequences used are: 
+1. Shell's original
+2. Knuth's increments
+3. Pratt's increments
+4. Hibbard's increments
+5. Sedgewick's increments
+6. Papernov's and Stasevich's increments
+
+The perfomance depends on the type of sequence used for a given input array. 
+
+## Working of shell sort:
+Using the shell's orignal sequence: `N/2, N/4....1`,
+1. If the array size is 8, then elements lying at the interval of `N/2` are compared and swapped if not in order. 
+  - The `0th` element is compared with the `4th` element
+  - If the `0th` element is greater than the `4th` element, then swap them.
+  - The process goes on for all remaining elements.
+  - Then rearrange at `N/2` intervals
+  - The same process goes on for the remaining elements.
+  - Finally the array elements lying at the interval of 1 are sorted. The array is now completely sorted.
+
+  ## Shell sort algorithm:
+```
+  shellSort(array, size)
+  for interval i <- size/2n down to 1
+    for each interval "i" in array
+        sort all the elements at interval "i"
+end shellSort
+```
+
+## Complexity:
+```
+Time Complexity	 
+Best	            O(nlog n)
+Worst	            O(n2)
+Average	            O(nlog n)
+Space Complexity	O(1)
+Stability	        No
+```
+
+This is an unstable algorithm because it doesnt examine the elements lying between the intervals.
+
+## Applications:
+1. When calling a stack is overhead.
+2. When recursion exceeds a limit.e.g. in `bzip2`
+3. Insertion sort does not perform well when the close elements are far apart. Shell sort helps in reducing the distance between those elements. Hence, there are less number  of swappings to be performed.
+
+# Linear Search:
+This is a sequential searching algorithm where we start from one end and check every element until the desired element is found.
+
+## Algorithm:
+  ```
+  LinearSearch(array, key)
+  for each item in the array
+    if item == value
+      return its index
+  ```
+## Complexity:
+Time complexity is `O(n)`
+Space complexity is `O(1)`
+
+## Applications:
+1. Searching operations in arrays of less than 100 items.
+
+# Binary search:
+This is an algorithm for finding the position of an element in a sorted array. 
+
+## Working:
+We have the iterative and recursive methods.
+General steps:
+1. Set 2 pointers high and low at the highest and lowest positions respectively. 
+2. Find the middle element `mid` of the array ie. `arr[(low + high) / 2]`
+3. If `x == mid` then return `mid`. Else, compare the element to be searched with `mid`.
+4. If `x > mid`, compare `x` with the middle element on the right side of `mid` by setting `low = mid + 1`, otherwise compare with the middle element on the left side of `mid` by setting `high = mid - 1`.
+5. Repeat steps 2 - 4 until low meets high.
+
+## Algorithm:
+## Iterative method:
+```
+do until the pointers low and high meet each other.
+    mid = (low + high)/2
+    if (x == arr[mid])
+        return mid
+    else if (x > arr[mid]) // x is on the right side
+        low = mid + 1
+    else                       // x is on the left side
+        high = mid - 1
+```
+
+## Recursive method:
+```
+binarySearch(arr, x, low, high)
+    if low > high
+        return False 
+    else
+        mid = (low + high) / 2 
+        if x == arr[mid]
+            return mid
+        else if x > arr[mid]        // x is on the right side
+            return binarySearch(arr, x, mid + 1, high)
+        else                               // x is on  the right side
+            return binarySearch(arr, x, low, mid - 1)
+```
+
+## Complexity:
+```
+Time Complexities: 
+
+Best case complexity:       O(1)
+Average case complexity:    O(log n)
+Worst case complexity:      O(log n)
+```
+
+space complexity:
+
+The space complexity of binary search is `O(1)`.
+
+## Applications:
+1. In libraries of Java, .NET, C ++, STL.
+2. Pinpointing where the error happens while debugging.
