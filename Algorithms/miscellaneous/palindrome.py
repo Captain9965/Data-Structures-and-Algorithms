@@ -20,3 +20,27 @@
     - Then remove all non-alphanumeric characters: 
         use regex matching for this
 """
+import re
+
+def isValidPalindrome(string: str):
+    string = re.sub("[^0-9A-Za-z]",'', string)
+    print(string)
+    
+    pointer1 = 0
+    pointer2 = len(string) - 1
+
+    """ if odd: """
+    
+    while(pointer1 < pointer2):
+        if(string[pointer1] == string[pointer2]):
+            pointer2 -= 1
+            pointer1 += 1
+        else:
+            return False
+        
+    return True
+
+if __name__ == "__main__":
+    string = "A man, a plan, a canal: Panama"
+    if(isValidPalindrome(string)):
+        pointer
