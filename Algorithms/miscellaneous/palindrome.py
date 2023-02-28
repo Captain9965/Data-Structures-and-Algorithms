@@ -19,18 +19,18 @@
 
     - Then remove all non-alphanumeric characters: 
         use regex matching for this
+    
+"""
+
+""" space and time analysis -> 
+    space = O(1)
+    time = O(n)
+
+
 """
 import re
 
-def isValidPalindrome(string: str):
-    string = re.sub("[^0-9A-Za-z]",'', string)
-    print(string)
-    
-    pointer1 = 0
-    pointer2 = len(string) - 1
-
-    """ if odd: """
-    
+def isValidPalindrome(string: str, pointer1, pointer2):
     while(pointer1 < pointer2):
         if(string[pointer1] == string[pointer2]):
             pointer2 -= 1
@@ -40,7 +40,43 @@ def isValidPalindrome(string: str):
         
     return True
 
+""" Almost a palindrome question: This is a string that will become a palindrome by removing one letter
+    Test cases:
+        Already palindromes are all true.
+        raceacar -> True
+        "accdba" -> True
+        "abcdefdba" -> false
+        "ab" -> True
+
+    space: O(1)
+    time: O(n)
+"""
+def almostAPalindrome(string: str):
+    string = re.sub("[^0-9A-Za-z]",'', string)
+    string = string.lower()
+   
+    
+    pointer1 = 0
+    pointer2 = len(string) - 1
+
+    while(pointer1 < pointer2):
+        if(string[pointer1] == string[pointer2]):
+            pointer2 -= 1
+            pointer1 += 1
+           
+        else:
+            """ check if almost a palindrome: """
+            
+            return(isValidPalindrome(string, pointer1 + 1, pointer2)) or (isValidPalindrome(string, pointer1, pointer2 - 1))
+                   
+    return True
+
+
 if __name__ == "__main__":
     string = "A man, a plan, a canal: Panama"
-    if(isValidPalindrome(string)):
-        pointer
+    string1 = "aabbaa"
+    string2 = "aabaa"
+
+    string3 = "raceacar"
+    string4 = "abccdba"
+    print(almostAPalindrome(string3))
