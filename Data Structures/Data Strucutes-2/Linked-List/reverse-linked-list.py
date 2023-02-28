@@ -2,7 +2,7 @@
 Given a linked list, return it in reverse:
     step 1: verify constraints:
             1. What do we return if we get null or a single argument?...we return probably null or the single argument.
-            2. 
+            
 
 """
 
@@ -29,8 +29,8 @@ class LinkedList:
 
         last.next = new_node
         return
-    def printLinkedList(self):
-        temp = self.head
+    def printLinkedList(self, head):
+        temp = head
         while(temp):
             print(str(temp.data), end="->")
             temp = temp.next
@@ -44,18 +44,56 @@ class LinkedList:
         while(currentNode):
             list_length += 1
             currentNode = currentNode.next
-        print(list_length)
 
-        l = list_length
-        startNode = head
         
-        for i in range(list_length - 1):
-            print(startNode.data)
+
+        loop_for = list_length
+        
+        for i in range(list_length - 1):            
+            l = loop_for
+            startNode = head
             while(l > 1):
                 startNode.data, startNode.next.data = startNode.next.data, startNode.data
                 startNode = startNode.next
                 l -= 1
+            loop_for -= 1
         return
+    
+    """ time is O(n)
+        space complexity is O(1)
+    """
+    def reverse_linked_list_optimized(self):
+        if self.head is None:
+            return
+        currentNode = self.head
+        previousNode = None
+
+        while(currentNode):
+            """ first store the reference to next node:"""
+            nextNode = currentNode.next
+            """let next point to previous node: """
+            currentNode.next = previousNode
+            """ update previous node to current node:"""
+            previousNode = currentNode
+            """update current node to previous next node"""
+            currentNode = nextNode
+        self.head = previousNode
+
+    """
+    Given a linked list and the numbers m and n, return the linked list with only positions m to n in reverse:
+        step 1: verify the constraints:
+                1. Is the linked list zero indexed? It is 1 indexed.
+                2. We can assume that 1 <= m <= n <= lenth of linked list
+
+        step2: test cases:
+            1. Best case test case: 1->2->3->4->5->null we will have 1->4->3->2->5 when m = 2 and n = 4
+            2. 1->2->3->4->5 becomes 5->4->3->2->1 when m = 1 and n = 5
+
+    """
+    def reverse_sub_linked_list(self, m, n):
+        
+        
+
 
 if __name__ == "__main__":
     linked_list = LinkedList()
@@ -65,6 +103,6 @@ if __name__ == "__main__":
     linked_list.insertAtEnd(4)
     linked_list.insertAtEnd(5)
 
-    linked_list.printLinkedList()
+    linked_list.printLinkedList(linked_list.head)
     linked_list.reverse_linked_list(linked_list.head)
-    linked_list.printLinkedList()
+    linked_list.printLinkedList(linked_list.head)
