@@ -88,6 +88,8 @@ class LinkedList:
         step2: test cases:
             1. Best case test case: 1->2->3->4->5->null we will have 1->4->3->2->5 when m = 2 and n = 4
             2. 1->2->3->4->5 becomes 5->4->3->2->1 when m = 1 and n = 5
+            3. 1 becomes 1 when both m and n is 1
+            4. null becomes null where m an dn are zero
 
     """
     def reverse_sub_linked_list(self, m, n):
