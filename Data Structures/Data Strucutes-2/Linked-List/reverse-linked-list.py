@@ -77,7 +77,6 @@ class LinkedList:
             previousNode = currentNode
             """update current node to previous next node"""
             currentNode = nextNode
-        self.head = previousNode
 
     """
     Given a linked list and the numbers m and n, return the linked list with only positions m to n in reverse:
@@ -93,8 +92,21 @@ class LinkedList:
 
     """
     def reverse_sub_linked_list(self, m, n):
+        if self.head is None:
+            return
         
+        endNode = self.head
+
+        """traverse to the end of the swap region: """
+
+        l = 1
+
+        while(l < n):
+            endNode = endNode.next
+            l += 1
+        print(endNode.data)
         
+
 
 
 if __name__ == "__main__":
@@ -106,5 +118,5 @@ if __name__ == "__main__":
     linked_list.insertAtEnd(5)
 
     linked_list.printLinkedList(linked_list.head)
-    linked_list.reverse_linked_list(linked_list.head)
-    linked_list.printLinkedList(linked_list.head)
+    linked_list.reverse_sub_linked_list(2, 4)
+    # linked_list.printLinkedList(linked_list.head)
