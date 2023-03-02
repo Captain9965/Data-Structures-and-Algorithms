@@ -91,20 +91,59 @@ class LinkedList:
             4. null becomes null where m an dn are zero
 
     """
-    def reverse_sub_linked_list(self, m, n):
-        if self.head is None:
-            return
+    def reverse_sub_linked_list(self, head ,m, n):
         
-        endNode = self.head
+        if m == n:
+            return head
+        if head is None:
+            return None
+        
+        endNode = head
 
         """traverse to the end of the swap region: """
 
         l = 1
 
-        while(l < n):
+        while(l <= n):
             endNode = endNode.next
             l += 1
-        print(endNode.data)
+
+        l = 1
+
+        startNode = head
+        prevNode = None
+        while (l <= m - 1):
+            prevNode = startNode
+            startNode = startNode.next
+            l += 1
+
+        
+
+        l = 0
+        
+       
+        previousNode = endNode
+        currentNode = startNode
+
+        
+
+
+        while(l <= (n - m)):
+             nextNode = currentNode.next
+             currentNode.next = previousNode
+             previousNode = currentNode
+             currentNode = nextNode
+             l += 1
+             
+        if (prevNode is not None):
+            prevNode.next = previousNode
+            head = prevNode
+        else:
+            head = previousNode
+        return head
+        
+        
+        
         
 
 
@@ -117,6 +156,7 @@ if __name__ == "__main__":
     linked_list.insertAtEnd(4)
     linked_list.insertAtEnd(5)
 
-    linked_list.printLinkedList(linked_list.head)
-    linked_list.reverse_sub_linked_list(2, 4)
     # linked_list.printLinkedList(linked_list.head)
+    ll = linked_list.reverse_sub_linked_list(linked_list.head,3, 4)
+
+    linked_list.printLinkedList(ll)
