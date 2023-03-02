@@ -104,7 +104,7 @@ class LinkedList:
 
         l = 1
 
-        while(l <= n):
+        while(l < n):
             endNode = endNode.next
             l += 1
 
@@ -112,7 +112,7 @@ class LinkedList:
 
         startNode = head
         prevNode = None
-        while (l <= m - 1):
+        while (l < m - 1):
             prevNode = startNode
             startNode = startNode.next
             l += 1
@@ -121,25 +121,28 @@ class LinkedList:
 
         l = 0
         
-       
+        self.printLinkedList(endNode)
         previousNode = endNode
-        currentNode = startNode
+        currentNode = startNode.next
+
+        """link start node with pre-end node"""
+        startNode.next = endNode
+
+
+
 
         
-
+        # self.printLinkedList(startNode)
+        # self.printLinkedList(currentNode)
+        # self.printLinkedList(previousNode)
 
         while(l <= (n - m)):
-             nextNode = currentNode.next
+             nextNode = currentNode.next 
              currentNode.next = previousNode
              previousNode = currentNode
              currentNode = nextNode
              l += 1
              
-        if (prevNode is not None):
-            prevNode.next = previousNode
-            head = prevNode
-        else:
-            head = previousNode
         return head
         
         
@@ -157,6 +160,6 @@ if __name__ == "__main__":
     linked_list.insertAtEnd(5)
 
     # linked_list.printLinkedList(linked_list.head)
-    ll = linked_list.reverse_sub_linked_list(linked_list.head,3, 4)
+    ll = linked_list.reverse_sub_linked_list(linked_list.head,1, 5)
 
-    linked_list.printLinkedList(ll)
+    # linked_list.printLinkedList(ll)
