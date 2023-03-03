@@ -144,6 +144,51 @@ class LinkedList:
              l += 1
              
         return head
+    
+    def reverse_sub_linked_listv2(self, head,  m, n):
+        if m == n:
+            return head
+        if head is None:
+            return None
+        
+        position = 1
+        currentNode = head
+        headNode = None
+        listSoFar = None
+        tailNode = None
+        endNode = None
+
+        while(position <=  n + 1):
+            print("looping")
+            if position == m:
+                # print(currentNode.data)
+                endNode = currentNode
+            if position == m - 1:
+                print(f"Head Node: {currentNode.data}. position -> {position}")
+                headNode = currentNode
+                currentNode = currentNode.next
+            elif position == n + 1:
+                tailNode = currentNode
+            elif position >= m and position <= n:
+                nextNode = currentNode.next
+                currentNode.next = listSoFar
+                listSoFar = currentNode
+                currentNode = nextNode
+                # print("breaking")
+            else:
+                currentNode = currentNode.next
+
+            position += 1
+        self.printLinkedList(listSoFar)
+        """we're done:"""
+        if(endNode):
+            print(f"end node -> {endNode.data}")
+            endNode.next = tailNode
+        if(headNode):
+            headNode.next = listSoFar
+        else:
+            head = listSoFar
+        return head
         
         
         
@@ -159,7 +204,7 @@ if __name__ == "__main__":
     linked_list.insertAtEnd(4)
     linked_list.insertAtEnd(5)
 
-    # linked_list.printLinkedList(linked_list.head)
-    ll = linked_list.reverse_sub_linked_list(linked_list.head,1, 5)
+    linked_list.printLinkedList(linked_list.head)
+    ll = linked_list.reverse_sub_linked_listv2(linked_list.head, 4, 5)
 
-    # linked_list.printLinkedList(ll)
+    linked_list.printLinkedList(ll)
