@@ -89,63 +89,17 @@ class LinkedList:
             2. 1->2->3->4->5 becomes 5->4->3->2->1 when m = 1 and n = 5
             3. 1 becomes 1 when both m and n is 1
             4. null becomes null where m an dn are zero
-
     """
-    def reverse_sub_linked_list(self, head ,m, n):
-        
-        if m == n:
-            return head
-        if head is None:
-            return None
-        
-        endNode = head
-
-        """traverse to the end of the swap region: """
-
-        l = 1
-
-        while(l < n):
-            endNode = endNode.next
-            l += 1
-
-        l = 1
-
-        startNode = head
-        prevNode = None
-        while (l < m - 1):
-            prevNode = startNode
-            startNode = startNode.next
-            l += 1
-
-        
-
-        l = 0
-        
-        self.printLinkedList(endNode)
-        previousNode = endNode
-        currentNode = startNode.next
-
-        """link start node with pre-end node"""
-        startNode.next = endNode
-
-
-
-
-        
-        # self.printLinkedList(startNode)
-        # self.printLinkedList(currentNode)
-        # self.printLinkedList(previousNode)
-
-        while(l <= (n - m)):
-             nextNode = currentNode.next 
-             currentNode.next = previousNode
-             previousNode = currentNode
-             currentNode = nextNode
-             l += 1
-             
-        return head
     
-    def reverse_sub_linked_listv2(self, head,  m, n):
+    """
+        For the optimized solution:
+
+        Time complexity is O(n)
+        Space complexity is O(1)
+    
+    """
+    
+    def reverse_sub_linked_list_optimized(self, head,  m, n):
         if m == n:
             return head
         if head is None:
@@ -159,12 +113,9 @@ class LinkedList:
         endNode = None
 
         while(position <=  n + 1):
-            print("looping")
             if position == m:
-                # print(currentNode.data)
                 endNode = currentNode
             if position == m - 1:
-                print(f"Head Node: {currentNode.data}. position -> {position}")
                 headNode = currentNode
                 currentNode = currentNode.next
             elif position == n + 1:
@@ -174,15 +125,11 @@ class LinkedList:
                 currentNode.next = listSoFar
                 listSoFar = currentNode
                 currentNode = nextNode
-                # print("breaking")
             else:
                 currentNode = currentNode.next
 
             position += 1
-        self.printLinkedList(listSoFar)
-        """we're done:"""
         if(endNode):
-            print(f"end node -> {endNode.data}")
             endNode.next = tailNode
         if(headNode):
             headNode.next = listSoFar
@@ -205,6 +152,5 @@ if __name__ == "__main__":
     linked_list.insertAtEnd(5)
 
     linked_list.printLinkedList(linked_list.head)
-    ll = linked_list.reverse_sub_linked_listv2(linked_list.head, 4, 5)
-
+    ll = linked_list.reverse_sub_linked_list_optimized(linked_list.head, 4, 5)
     linked_list.printLinkedList(ll)
