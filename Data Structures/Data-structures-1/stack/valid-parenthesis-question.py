@@ -3,24 +3,36 @@
 
 """
 
-def isValid(string: str):
-    pointer1 = 0
-    pointer2 = len(string) - 1
+"""
 
-    while (pointer1 < pointer2):
-        if (string[pointer1] != string[pointer2]):
-            print(pointer1, pointer2)
-            print(string[pointer1], string[pointer2])
-            return False
+    space analysis -> O(n)
+    time analysis -> O(n)
+"""
+
+def isValid(string: str):
+    bracket_pairs = {'(': ')', '{':'}', '[': ']'}
+    opening_brackets = []
+
+    for i in string:
+        if bracket_pairs.get(i):
+            opening_brackets.append(i)
         else:
-            pointer2 -= 1
-            pointer1 += 1
-    return True
+            if len(opening_brackets):
+                last_saved = opening_brackets.pop()
+                if i != bracket_pairs.get(last_saved):
+                    return False
+            else:
+                return False 
+    
+    return len(opening_brackets) == 0
+    
+     
 
 if __name__ == "__main__":
     testCase1 = "(())"
     testCase2 = "{(]}"
     testCase3 = ""
     testCase4 = "{[)]}"
+    testCase5 = "()"
 
-    print(isValid(testCase1))
+    print(isValid(testCase5))
