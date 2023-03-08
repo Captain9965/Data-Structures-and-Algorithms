@@ -12,3 +12,34 @@
         3. "))((" -> ""
 
 """
+
+
+def minimumRemove(string: str):
+    str_array = list(string)
+    bracketsToBeRemoved = []
+    for i in range(len(string)):
+        print(i)
+        if str_array[i] == '(':
+            bracketsToBeRemoved.append(i)
+        elif str_array[i] == ')':
+            if len(bracketsToBeRemoved) > 0:
+                bracketsToBeRemoved.pop()
+            else:
+                bracketsToBeRemoved.append(i)
+    print(bracketsToBeRemoved)
+    if len(bracketsToBeRemoved) > 0:
+        for i in bracketsToBeRemoved:
+            str_array.pop(i)
+    return "".join(str_array)
+
+
+
+
+
+
+if __name__ == "__main__":
+    testString1 = "a)bc(d)"
+    testString2 = "(())"
+    testString3 = "))(("
+
+    print(minimumRemove(testString3))
