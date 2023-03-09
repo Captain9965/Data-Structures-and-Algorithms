@@ -17,19 +17,46 @@
 def minimumRemove(string: str):
     str_array = list(string)
     bracketsToBeRemoved = []
-    for i in range(len(string)):
-        print(i)
-        if str_array[i] == '(':
-            bracketsToBeRemoved.append(i)
-        elif str_array[i] == ')':
+    position = 0
+    i = 0
+    while i < len(string):
+        if str_array[position] == '(':
+            bracketsToBeRemoved.append(position)
+            position += 1
+        elif str_array[position] == ')':
             if len(bracketsToBeRemoved) > 0:
                 bracketsToBeRemoved.pop()
+                position += 1
             else:
-                bracketsToBeRemoved.append(i)
-    print(bracketsToBeRemoved)
-    if len(bracketsToBeRemoved) > 0:
-        for i in bracketsToBeRemoved:
-            str_array.pop(i)
+                str_array.pop(position)
+        else:
+            position += 1
+        i += 1
+    while len(bracketsToBeRemoved) > 0:
+        str_array.pop(bracketsToBeRemoved.pop())
+    return "".join(str_array)
+
+
+"""
+    time complexity -> O(n)
+    space complexity -> O(n)
+
+"""
+def minimumRemovev2(string:str):
+    str_array = list(string)
+    bracketsToBeRemoved = []
+   
+    for position in range(len(string)):
+        if str_array[position] == '(':
+            bracketsToBeRemoved.append(position)
+        elif str_array[position] == ')':
+            if len(bracketsToBeRemoved):
+                bracketsToBeRemoved.pop()
+                
+            else:
+                str_array[position] = ''
+    while len(bracketsToBeRemoved):
+        str_array[bracketsToBeRemoved.pop()] = ''
     return "".join(str_array)
 
 
@@ -42,4 +69,4 @@ if __name__ == "__main__":
     testString2 = "(())"
     testString3 = "))(("
 
-    print(minimumRemove(testString3))
+    print(minimumRemovev2(testString1))
