@@ -1,4 +1,7 @@
-""" Python implementation of insertion sort(ascending order):"""
+""" Python implementation of insertion sort(ascending order):
+    useful when we know the list is almost sorted...we can easily get O(n)  complexity
+
+"""
 
 def insertionSort(array):
     for step in range(1, len(array)):

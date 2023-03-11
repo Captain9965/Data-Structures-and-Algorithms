@@ -1,4 +1,7 @@
-""" python implementation of selection sort:"""
+""" python implementation of selection sort:
+    also very time inefficient, with O(n^2) time complexity in all circumstances!
+
+"""
 def selectionSort(array):
     for step in range(len(array) - 1):
         min_index = step

@@ -1,4 +1,6 @@
 """ Merge sort in python:
+    Space complexity is O(n) due to recursion
+    Time complexity is O(n log n ) hence very perfomant
 """
 
 def mergeSort(array):
