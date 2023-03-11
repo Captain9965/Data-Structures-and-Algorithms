@@ -1,4 +1,8 @@
-""" Quick sort algorithm in python: """
+""" Quick sort algorithm in python: 
+    On average the quickest sorting algorithm with O(n log n) but has a nasty worst case time complexity
+    if the pivot point is not guaranteed to be good -> O(n^2)
+    space complexity is better than merge sort -> O(log n)
+"""
 
 def partition(array, low, high):
     """ choose the rightmost element as the pivot:"""
