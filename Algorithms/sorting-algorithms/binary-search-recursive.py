@@ -1,4 +1,7 @@
-""" recursive binary search in python: """
+""" recursive binary search in python: 
+        Time complexity is O(log n) as we are reducing our search space by half at every iteration
+        space complexity is O(1) as we are using tail recursion here!!
+"""
 
 def binarySearch(array, x, low, high):
     if low <= high:
