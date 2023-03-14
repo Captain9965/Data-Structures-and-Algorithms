@@ -38,33 +38,52 @@ def start_and_end_index_linear_search(array, low, high, k):
         return [-1, -1]
 
 """ 
-    using binary search instead for O(log n) time:
-
+    Now this has O(log n) overall time complexity since it uses binary search to traverse the entire array
+    time complexity is O(1) since we are not using any scaling data structure
 
 """
-def start_and_end_index_bin_search(array, low, high, k):
-    if low <= high:
+
+def searchRange(array, k):
+    low = 0
+    high = len(array) - 1
+
+    while low <= high:
         mid = (low + high) // 2
         if array[mid] == k:
-            return mid
+            left = mid
+            right = mid
+            low = 0
+            high = mid - 1
+
+            while low <= high:
+                m = (low + high) // 2
+                if array[m] == k:
+                    left = m
+                    high = m - 1
+                else:
+                    low = m + 1
+            low = mid + 1
+            high = len(array) - 1
+
+            while low <= high:
+                m = (low + high) // 2
+                if array[m] == k:
+                    right = m
+                    low = m + 1
+                else:
+                    high = m - 1
+
+            return [left, right]
         elif array[mid] < k:
-            return start_and_end_index_bin_search(array, mid + 1, high, k)
+            low = mid + 1
         else:
-            return start_and_end_index_bin_search(array, low, mid - 1, k)
-    else:
-        return -1
+            high = mid - 1
+    return [-1, -1]
 
-
-def searchRange(array, target):
-    mid = start_and_end_index_bin_search(array, 0, len(array) - 1, target)
-    if mid == -1:
-        return [-1, -1]
-    else:
-        left = mid
-        right = mid
     
+
 
 if __name__ == "__main__":
     testCase1 = [1, 2, 2, 3, 3, 3, 4, 5, 5, 5, 6, 7]
-    testCase2 = []
-    print(searchRange(testCase2, 5))
+    testCase2 = [5, 5]
+    print(searchRange(testCase2, 5 ))
