@@ -27,3 +27,22 @@ def fill_right_side_view(root: Node, result, level = 0):
         result[level - 1] = root.val
     fill_right_side_view(root.left, result, level)
     fill_right_side_view(root.right, result, level)
+
+""" 
+    space and time analysis ->
+        time is O(n)
+        space complexity is O(n)
+
+
+"""
+
+def fill_right_side_view_prioritize_right(root: Node, result, level = 0):
+    if root is None:
+        return
+    level += 1
+    if len(result) < level:
+        result.append(root.val)
+    if root.right:
+        fill_right_side_view(root.right, result, level)
+    if root.left:
+        fill_right_side_view(root.left, result, level)
