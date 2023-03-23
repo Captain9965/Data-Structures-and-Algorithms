@@ -7,10 +7,18 @@
     As a result, we use topological sort...which works on directed acyclic graph..
 
 """
+
+""" 
+    space and time complexity:
+        space -> O(n^2)
+        time -> O(P + n^2)
+
+"""
 def canFinish(numCourses, prerequisites):
     adjList = [[] for i in range(numCourses)]
     inDegreeMatrix = [0 for i in range(numCourses)]
     createLists(numCourses, prerequisites, adjList, inDegreeMatrix)
+    print(inDegreeMatrix, adjList)
     return not hasCycle(inDegreeMatrix, adjList)
 
 
@@ -20,25 +28,26 @@ def createLists(numCourses, prerequisites, adjList, inDegreeMatrix):
         inDegreeMatrix[course[0]] += 1
 
 def hasCycle(inDegreeMatrix, adjList):
-    seen = []
-    currentNode = None
-    while 1:
-        for i in range(len(inDegreeMatrix)):
-            if inDegreeMatrix[i] == 0 and i not in seen:
-                currentNode = i
-                break;
-        if currentNode is None:
-            break;
-        seen.append(currentNode)
+    stack = []
+    for i in range(len(inDegreeMatrix)):
+        if inDegreeMatrix[i] == 0:
+            stack.append(i)
+    count = 0
+    while(len(stack)):
+        currentNode = stack.pop()
+        count += 1
         for child in adjList[currentNode]:
             inDegreeMatrix[child] -= 1
-    if len(seen) == len(inDegreeMatrix):
-        return True
-    else:
+            if inDegreeMatrix[child] == 0:
+                    stack.append(child)
+    if count == len(inDegreeMatrix):
         return False
+    else:
+        return True
 
 
 
 if __name__ == "__main__":
     prerequisites = [[1,0],[0,1]]
-    canFinish(len(prerequisites), prerequisites)
+    prerequisites2 = [[1, 0]]
+    print(canFinish(2, prerequisites2))
