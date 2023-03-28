@@ -1,54 +1,69 @@
 """ Priority queue application in python: """
-""" heapify function:"""
+""" sift down function:"""
 
-def heapify(arr, n, i):
-    """ find the largest among the root, left and right child:"""
-    largest = i;
-    l = 2 * i + 1;
-    r = 2 * i + 2;
+import math
+class  PriorityQueue:
+    def __init__(self, isMaxHeap = True):
+        self.array = []
+        self.isMax_heap = isMaxHeap
+    def size(self):
+        return len(self.array)
+    def peek(self):
+        return self.array[0]
+    def isEmpty(self):
+        return len(self.array) == 0
+    def parent(self, idx):
+        return math.floor((idx - 1) / 2)
+    def leftChild(self, idx):
+        return (idx * 2) + 1
+    def rightChild(self, idx):
+        return (idx * 2) + 2
+    def swap(self, i, j):
+        self.array[i], self.array[j] = self.array[j], self.array[i]
+    def compare(self, i, j):
+        if self.isMax_heap:
+            return self.array[i] > self.array[j]
+        else:
+            return self.array[i] < self.array[j]
+    def push(self, value):
+        self.array.append(value)
+        self.siftUp()
+        return self.size
+    def siftUp(self):
+        nodeIdx = self.size() - 1
+        while(nodeIdx > 0 and self.compare(nodeIdx, self.parent(nodeIdx))):
+            self.swap(nodeIdx, self.parent(nodeIdx))
+            nodeIdx = self.parent(nodeIdx)
+    def pop(self):
+        if self.isEmpty():
+            return None
+        self.swap(0, self.size() - 1)
+        val = self.array.pop()
+        self.siftDown()
+        return val
+    def siftDown(self):
+        nodeIdx = 0
 
-    if l < n and arr[i] < arr[l]:
-        largest = l;
-    if r < n and arr[r] < arr[r]:
-        largest = r;
-
-    """ swap and continue heapifying if the root is not the largest:"""
-    if largest != i:
-        arr[i], arr[largest] = arr[largest], arr[i]
-        heapify(arr, n, largest)
-
-""" insert an element into the tree:"""
-def insert(array, newNum):
-    size = len(array)
-    if size == 0:
-        array.append(newNum)
-    else:
-        array.append(newNum)
-        for i in range((size // 2 ) - 1, -1, -1):
-            heapify(array, size, i)
-
-""" delete and element:"""
-def deleteNode(array, num):
-    size = len(array)
-    i = 0
-    for i in range(0, size):
-        if (num == array[i]):
-            break
-    array[i], array[size - 1] = array[size - 1], array[i]
-    array.pop()
-
-    for i in range((len(array) // 2 ) - 1, -1, -1):
-            heapify(array, len(array), i)
+        while ((self.leftChild(nodeIdx) < self.size()) and self.compare(self.leftChild(nodeIdx), nodeIdx) or
+            (self.rightChild(nodeIdx) < self.size()) and self.compare(self.rightChild(nodeIdx), nodeIdx)):
+            greaterChildIdx = self.rightChild(nodeIdx) if (self.rightChild(nodeIdx) < self.size() and self.compare(self.rightChild(nodeIdx), self.leftChild(nodeIdx))) \
+                            else self.leftChild(nodeIdx)
+            self.swap(greaterChildIdx, nodeIdx)
+            nodeIdx = greaterChildIdx
+    def printQueue(self):
+        for i in range(len(self.array)):
+            print(self.array[i], end= " ")
+        print()
 
 if __name__ == "__main__":
-    arr = []
+    pq = PriorityQueue()
+    pq.push(15)
+    pq.push(12)
+    pq.push(50)
+    pq.push(7)
+    pq.push(40)
+    pq.push(22)
 
-    insert(arr, 3)
-    insert(arr, 4)
-    insert(arr, 9)
-    insert(arr, 5)
-    insert(arr, 2)
+    while not pq.isEmpty():
+        print(pq.pop())
 
-    print("\n Max heap array-> " + str(arr))
-    deleteNode(arr, 4)
-    print("After deleting element -> " + str(arr))
