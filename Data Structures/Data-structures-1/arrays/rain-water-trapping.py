@@ -121,7 +121,7 @@ def calculate_total_rain_water_optimized(array):
     
 
 if __name__ == "__main__":
-    array = [0, 1, 0, 2, 1, 0, 3, 1, 0, 1, 2]
+    array = [0,1,0,2,1,0,1,0,2,1,2,1]
     array1 = [0, 1, 0, 3, 4, 5]
     array2 = []
     array3 = [4]
