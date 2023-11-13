@@ -12,8 +12,8 @@ def count_islands(array):
     column = 0
     count = 0
     directions = [[-1, 0], [0, 1], [1, 0], [0, -1]]
-    for row in len(array):
-        for column in len(array)[0]:
+    for row in range(len(array)):
+        for column in range(len(array[0])):
             if array[row][column] == "1":
                 count += 1
                 dfs(array, row, column, directions)
@@ -56,3 +56,11 @@ def bfs(array, row, column, directions):
         #push to queue:
         for direction in directions:
             queue.append([row + direction[0], column + direction[1]])
+
+
+if __name__ == "__main__":
+    islandMatrix = [["1","1","1","1","0"],
+                    ["1","1","0","1","0"],
+                    ["1","1","0","0","0"],
+                    ["0","0","0","0","1"]]
+    print(count_islands(islandMatrix))
