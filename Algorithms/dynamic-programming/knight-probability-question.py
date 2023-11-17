@@ -105,4 +105,4 @@ def finalOptimization(n, k, r, c):
 
 
 if __name__ == "__main__":
-    # memoizedSolution(5, 2, 2, 2)
+    print(finalOptimization(6, 2, 2, 2))
